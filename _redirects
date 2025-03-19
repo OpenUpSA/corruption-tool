@@ -1,1 +1,1 @@
-/assets/* /.netlify/functions/proxy/:splat 200
+/assets/* /netlify/functions/proxy/:splat 200
