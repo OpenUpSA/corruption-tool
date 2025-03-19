@@ -1,0 +1,1184 @@
+{
+  "name": "South Africa",
+  "code": "ZA",
+  "provinces": [
+    {
+      "name": "Mpumalanga",
+      "code": "MP",
+      "districts": [
+        {
+          "name": "Nkangala",
+          "code": "DC31",
+          "munis": [
+            {
+              "name": "Emalahleni Local Municipality",
+              "code": "MP312"
+            },
+            {
+              "name": "Victor Khanye Local Municipality",
+              "code": "MP311"
+            },
+            {
+              "name": "Dr JS Moroka Local Municipality",
+              "code": "MP316"
+            },
+            {
+              "name": "Thembisile Hani Local Municipality",
+              "code": "MP315"
+            },
+            {
+              "name": "Emakhazeni Local Municipality",
+              "code": "MP314"
+            },
+            {
+              "name": "Steve Tshwete Local Municipality",
+              "code": "MP313"
+            }
+          ]
+        },
+        {
+          "name": "Gert Sibande",
+          "code": "DC30",
+          "munis": [
+            {
+              "name": "Dipaleseng Local Municipality",
+              "code": "MP306"
+            },
+            {
+              "name": "Lekwa Local Municipality",
+              "code": "MP305"
+            },
+            {
+              "name": "Dr Pixley Ka Isaka Seme Local Municipality",
+              "code": "MP304"
+            },
+            {
+              "name": "Mkhondo Local Municipality",
+              "code": "MP303"
+            },
+            {
+              "name": "Msukaligwa Local Municipality",
+              "code": "MP302"
+            },
+            {
+              "name": "Chief Albert Luthuli Local Municipality",
+              "code": "MP301"
+            },
+            {
+              "name": "Govan Mbeki Local Municipality",
+              "code": "MP307"
+            }
+          ]
+        },
+        {
+          "name": "Ehlanzeni",
+          "code": "DC32",
+          "munis": [
+            {
+              "name": "City of Mbombela Local Municipality",
+              "code": "MP326"
+            },
+            {
+              "name": "Bushbuckridge Local Municipality",
+              "code": "MP325"
+            },
+            {
+              "name": "Nkomazi Local Municipality",
+              "code": "MP324"
+            },
+            {
+              "name": "Thaba Chweu Local Municipality",
+              "code": "MP321"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Northern Cape",
+      "code": "NC",
+      "districts": [
+        {
+          "name": "Frances Baard",
+          "code": "DC9",
+          "munis": [
+            {
+              "name": "Phokwane Local Municipality",
+              "code": "NC094"
+            },
+            {
+              "name": "Magareng Local Municipality",
+              "code": "NC093"
+            },
+            {
+              "name": "Dikgatlong Local Municipality",
+              "code": "NC092"
+            },
+            {
+              "name": "Sol Plaatje Local Municipality",
+              "code": "NC091"
+            }
+          ]
+        },
+        {
+          "name": "John Taolo Gaetsewe",
+          "code": "DC45",
+          "munis": [
+            {
+              "name": "Gamagara Local Municipality",
+              "code": "NC453"
+            },
+            {
+              "name": "Ga-Segonyana Local Municipality",
+              "code": "NC452"
+            },
+            {
+              "name": "Joe Morolong Local Municipality",
+              "code": "NC451"
+            }
+          ]
+        },
+        {
+          "name": "Namakwa",
+          "code": "DC6",
+          "munis": [
+            {
+              "name": "Kh\u00c3\u00a2i-Ma Local Municipality",
+              "code": "NC067"
+            },
+            {
+              "name": "Karoo Hoogland Local Municipality",
+              "code": "NC066"
+            },
+            {
+              "name": "Hantam Local Municipality",
+              "code": "NC065"
+            },
+            {
+              "name": "Kamiesberg Local Municipality",
+              "code": "NC064"
+            },
+            {
+              "name": "Nama Khoi Local Municipality",
+              "code": "NC062"
+            },
+            {
+              "name": "Richtersveld Local Municipality",
+              "code": "NC061"
+            }
+          ]
+        },
+        {
+          "name": "Z F Mgcawu",
+          "code": "DC8",
+          "munis": [
+            {
+              "name": "Kai !Garib Local Municipality",
+              "code": "NC082"
+            },
+            {
+              "name": "Dawid Kruiper Local Municipality",
+              "code": "NC087"
+            },
+            {
+              "name": "Kgatelopele Local Municipality",
+              "code": "NC086"
+            },
+            {
+              "name": "Tsantsabane Local Municipality",
+              "code": "NC085"
+            },
+            {
+              "name": "!Kheis Local Municipality",
+              "code": "NC084"
+            }
+          ]
+        },
+        {
+          "name": "Pixley ka Seme",
+          "code": "DC7",
+          "munis": [
+            {
+              "name": "Umsobomvu Local Municipality",
+              "code": "NC072"
+            },
+            {
+              "name": "Ubuntu Local Municipality",
+              "code": "NC071"
+            },
+            {
+              "name": "Siyancuma Local Municipality",
+              "code": "NC078"
+            },
+            {
+              "name": "Siyathemba Local Municipality",
+              "code": "NC077"
+            },
+            {
+              "name": "Thembelihle Local Municipality",
+              "code": "NC076"
+            },
+            {
+              "name": "Renosterberg Local Municipality",
+              "code": "NC075"
+            },
+            {
+              "name": "Kareeberg Local Municipality",
+              "code": "NC074"
+            },
+            {
+              "name": "Emthanjeni Local Municipality",
+              "code": "NC073"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Eastern Cape",
+      "code": "EC",
+      "districts": [
+        {
+          "name": "Nelson Mandela Bay",
+          "code": "NMA",
+          "munis": []
+        },
+        {
+          "name": "Chris Hani",
+          "code": "DC13",
+          "munis": [
+            {
+              "name": "Emalahleni Local Municipality",
+              "code": "EC136"
+            },
+            {
+              "name": "Intsika Yethu Local Municipality",
+              "code": "EC135"
+            },
+            {
+              "name": "Inxuba Yethemba Local Municipality",
+              "code": "EC131"
+            },
+            {
+              "name": "Enoch Mgijima Local Municipality",
+              "code": "EC139"
+            },
+            {
+              "name": "Sakhisizwe Local Municipality",
+              "code": "EC138"
+            },
+            {
+              "name": "Engcobo Local Municipality",
+              "code": "EC137"
+            }
+          ]
+        },
+        {
+          "name": "O.R.Tambo",
+          "code": "DC15",
+          "munis": [
+            {
+              "name": "King Sabata Dalindyebo Local Municipality",
+              "code": "EC157"
+            },
+            {
+              "name": "Mhlontlo Local Municipality",
+              "code": "EC156"
+            },
+            {
+              "name": "Nyandeni Local Municipality",
+              "code": "EC155"
+            },
+            {
+              "name": "Port St Johns Local Municipality",
+              "code": "EC154"
+            },
+            {
+              "name": "Ingquza Hill Local Municipality",
+              "code": "EC153"
+            }
+          ]
+        },
+        {
+          "name": "Alfred Nzo",
+          "code": "DC44",
+          "munis": [
+            {
+              "name": "Ntabankulu Local Municipality",
+              "code": "EC444"
+            },
+            {
+              "name": "Mbizana Local Municipality",
+              "code": "EC443"
+            },
+            {
+              "name": "Umzimvubu Local Municipality",
+              "code": "EC442"
+            },
+            {
+              "name": "Matatiele Local Municipality",
+              "code": "EC441"
+            }
+          ]
+        },
+        {
+          "name": "Sarah Baartman",
+          "code": "DC10",
+          "munis": [
+            {
+              "name": "Blue Crane Route Local Municipality",
+              "code": "EC102"
+            },
+            {
+              "name": "Dr Beyers Naude Local Municipality",
+              "code": "EC101"
+            },
+            {
+              "name": "Kou-Kamma Local Municipality",
+              "code": "EC109"
+            },
+            {
+              "name": "Kouga Local Municipality",
+              "code": "EC108"
+            },
+            {
+              "name": "Sundays River Valley Local Municipality",
+              "code": "EC106"
+            },
+            {
+              "name": "Ndlambe Local Municipality",
+              "code": "EC105"
+            },
+            {
+              "name": "Makana Local Municipality",
+              "code": "EC104"
+            }
+          ]
+        },
+        {
+          "name": "Joe Gqabi",
+          "code": "DC14",
+          "munis": [
+            {
+              "name": "Walter Sisulu Local Municipality",
+              "code": "EC145"
+            },
+            {
+              "name": "Senqu Local Municipality",
+              "code": "EC142"
+            },
+            {
+              "name": "Elundini Local Municipality",
+              "code": "EC141"
+            }
+          ]
+        },
+        {
+          "name": "Amathole",
+          "code": "DC12",
+          "munis": [
+            {
+              "name": "Amahlathi Local Municipality",
+              "code": "EC124"
+            },
+            {
+              "name": "Great Kei Local Municipality",
+              "code": "EC123"
+            },
+            {
+              "name": "Mnquma Local Municipality",
+              "code": "EC122"
+            },
+            {
+              "name": "Mbhashe Local Municipality",
+              "code": "EC121"
+            },
+            {
+              "name": "Raymond Mhlaba Local Municipality",
+              "code": "EC129"
+            },
+            {
+              "name": "Ngqushwa Local Municipality",
+              "code": "EC126"
+            }
+          ]
+        },
+        {
+          "name": "Buffalo City",
+          "code": "BUF",
+          "munis": []
+        }
+      ]
+    },
+    {
+      "name": "Limpopo",
+      "code": "LIM",
+      "districts": [
+        {
+          "name": "Waterberg",
+          "code": "DC36",
+          "munis": [
+            {
+              "name": "Modimolle-Mookgophong Local Municipality",
+              "code": "LIM368"
+            },
+            {
+              "name": "Mogalakwena Local Municipality",
+              "code": "LIM367"
+            },
+            {
+              "name": "Bela-Bela Local Municipality",
+              "code": "LIM366"
+            },
+            {
+              "name": "Lephalale Local Municipality",
+              "code": "LIM362"
+            },
+            {
+              "name": "Thabazimbi Local Municipality",
+              "code": "LIM361"
+            }
+          ]
+        },
+        {
+          "name": "Mopani",
+          "code": "DC33",
+          "munis": [
+            {
+              "name": "Maruleng Local Municipality",
+              "code": "LIM335"
+            },
+            {
+              "name": "Ba-Phalaborwa Local Municipality",
+              "code": "LIM334"
+            },
+            {
+              "name": "Greater Tzaneen Local Municipality",
+              "code": "LIM333"
+            },
+            {
+              "name": "Greater Letaba Local Municipality",
+              "code": "LIM332"
+            },
+            {
+              "name": "Greater Giyani Local Municipality",
+              "code": "LIM331"
+            }
+          ]
+        },
+        {
+          "name": "Vhembe",
+          "code": "DC34",
+          "munis": [
+            {
+              "name": "Collins Chabane Local Municipality",
+              "code": "LIM345"
+            },
+            {
+              "name": "Makhado Local Municipality",
+              "code": "LIM344"
+            },
+            {
+              "name": "Thulamela Local Municipality",
+              "code": "LIM343"
+            },
+            {
+              "name": "Musina Local Municipality",
+              "code": "LIM341"
+            }
+          ]
+        },
+        {
+          "name": "Sekhukhune",
+          "code": "DC47",
+          "munis": [
+            {
+              "name": "Fetakgomo Tubatse Local Municipality",
+              "code": "LIM476"
+            },
+            {
+              "name": "Makhuduthamaga Local Municipality",
+              "code": "LIM473"
+            },
+            {
+              "name": "Elias Motsoaledi Local Municipality",
+              "code": "LIM472"
+            },
+            {
+              "name": "Ephraim Mogale Local Municipality",
+              "code": "LIM471"
+            }
+          ]
+        },
+        {
+          "name": "Capricorn",
+          "code": "DC35",
+          "munis": [
+            {
+              "name": "Lepele-Nkumpi Local Municipality",
+              "code": "LIM355"
+            },
+            {
+              "name": "Polokwane Local Municipality",
+              "code": "LIM354"
+            },
+            {
+              "name": "Molemole Local Municipality",
+              "code": "LIM353"
+            },
+            {
+              "name": "Blouberg Local Municipality",
+              "code": "LIM351"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Free State",
+      "code": "FS",
+      "districts": [
+        {
+          "name": "Xhariep",
+          "code": "DC16",
+          "munis": [
+            {
+              "name": "Mohokare Local Municipality",
+              "code": "FS163"
+            },
+            {
+              "name": "Kopanong Local Municipality",
+              "code": "FS162"
+            },
+            {
+              "name": "Letsemeng Local Municipality",
+              "code": "FS161"
+            }
+          ]
+        },
+        {
+          "name": "Fezile Dabi",
+          "code": "DC20",
+          "munis": [
+            {
+              "name": "Mafube Local Municipality",
+              "code": "FS205"
+            },
+            {
+              "name": "Metsimaholo Local Municipality",
+              "code": "FS204"
+            },
+            {
+              "name": "Ngwathe Local Municipality",
+              "code": "FS203"
+            },
+            {
+              "name": "Moqhaka Local Municipality",
+              "code": "FS201"
+            }
+          ]
+        },
+        {
+          "name": "Lejweleputswa",
+          "code": "DC18",
+          "munis": [
+            {
+              "name": "Nala Local Municipality",
+              "code": "FS185"
+            },
+            {
+              "name": "Matjhabeng Local Municipality",
+              "code": "FS184"
+            },
+            {
+              "name": "Tswelopele Local Municipality",
+              "code": "FS183"
+            },
+            {
+              "name": "Tokologo Local Municipality",
+              "code": "FS182"
+            },
+            {
+              "name": "Masilonyana Local Municipality",
+              "code": "FS181"
+            }
+          ]
+        },
+        {
+          "name": "Thabo Mofutsanyane",
+          "code": "DC19",
+          "munis": [
+            {
+              "name": "Maluti a Phofung Local Municipality",
+              "code": "FS194"
+            },
+            {
+              "name": "Nketoana Local Municipality",
+              "code": "FS193"
+            },
+            {
+              "name": "Dihlabeng Local Municipality",
+              "code": "FS192"
+            },
+            {
+              "name": "Setsoto Local Municipality",
+              "code": "FS191"
+            },
+            {
+              "name": "Mantsopa Local Municipality",
+              "code": "FS196"
+            },
+            {
+              "name": "Phumelela Local Municipality",
+              "code": "FS195"
+            }
+          ]
+        },
+        {
+          "name": "Mangaung",
+          "code": "MAN",
+          "munis": []
+        }
+      ]
+    },
+    {
+      "name": "Gauteng",
+      "code": "GT",
+      "districts": [
+        {
+          "name": "West Rand",
+          "code": "DC48",
+          "munis": [
+            {
+              "name": "Rand West City Local Municipality",
+              "code": "GT485"
+            },
+            {
+              "name": "Merafong City Local Municipality",
+              "code": "GT484"
+            },
+            {
+              "name": "Mogale City Local Municipality",
+              "code": "GT481"
+            }
+          ]
+        },
+        {
+          "name": "Sedibeng",
+          "code": "DC42",
+          "munis": [
+            {
+              "name": "Lesedi Local Municipality",
+              "code": "GT423"
+            },
+            {
+              "name": "Midvaal Local Municipality",
+              "code": "GT422"
+            },
+            {
+              "name": "Emfuleni Local Municipality",
+              "code": "GT421"
+            }
+          ]
+        },
+        {
+          "name": "City of Tshwane",
+          "code": "TSH",
+          "munis": []
+        },
+        {
+          "name": "Ekurhuleni",
+          "code": "EKU",
+          "munis": []
+        },
+        {
+          "name": "City of Johannesburg",
+          "code": "JHB",
+          "munis": []
+        }
+      ]
+    },
+    {
+      "name": "KwaZulu-Natal",
+      "code": "KZN",
+      "districts": [
+        {
+          "name": "Umgungundlovu",
+          "code": "DC22",
+          "munis": [
+            {
+              "name": "The Msunduzi Local Municipality",
+              "code": "KZN225"
+            },
+            {
+              "name": "Impendle Local Municipality",
+              "code": "KZN224"
+            },
+            {
+              "name": "Mpofana Local Municipality",
+              "code": "KZN223"
+            },
+            {
+              "name": "uMngeni Local Municipality",
+              "code": "KZN222"
+            },
+            {
+              "name": "uMshwathi Local Municipality",
+              "code": "KZN221"
+            },
+            {
+              "name": "Richmond Local Municipality",
+              "code": "KZN227"
+            },
+            {
+              "name": "Mkhambathini Local Municipality",
+              "code": "KZN226"
+            }
+          ]
+        },
+        {
+          "name": "Uthukela",
+          "code": "DC23",
+          "munis": [
+            {
+              "name": "Okhahlamba Local Municipality",
+              "code": "KZN235"
+            },
+            {
+              "name": "Alfred Duma Local Municipality",
+              "code": "KZN238"
+            },
+            {
+              "name": "Inkosi Langalibalele Local Municipality",
+              "code": "KZN237"
+            }
+          ]
+        },
+        {
+          "name": "Harry Gwala",
+          "code": "DC43",
+          "munis": [
+            {
+              "name": "Ubuhlebezwe Local Municipality",
+              "code": "KZN434"
+            },
+            {
+              "name": "Greater Kokstad Local Municipality",
+              "code": "KZN433"
+            },
+            {
+              "name": "Dr Nkosazana Dlamini Zuma Local Municipality",
+              "code": "KZN436"
+            },
+            {
+              "name": "Umzimkhulu Local Municipality",
+              "code": "KZN435"
+            }
+          ]
+        },
+        {
+          "name": "Ugu",
+          "code": "DC21",
+          "munis": [
+            {
+              "name": "UMuziwabantu Local Municipality",
+              "code": "KZN214"
+            },
+            {
+              "name": "Umzumbe Local Municipality",
+              "code": "KZN213"
+            },
+            {
+              "name": "Umdoni Local Municipality",
+              "code": "KZN212"
+            },
+            {
+              "name": "Ray Nkonyeni Local Municipality",
+              "code": "KZN216"
+            }
+          ]
+        },
+        {
+          "name": "King Cetshwayo",
+          "code": "DC28",
+          "munis": [
+            {
+              "name": "Nkandla Local Municipality",
+              "code": "KZN286"
+            },
+            {
+              "name": "Mthonjaneni Local Municipality",
+              "code": "KZN285"
+            },
+            {
+              "name": "uMlalazi Local Municipality",
+              "code": "KZN284"
+            },
+            {
+              "name": "uMhlathuze Local Municipality",
+              "code": "KZN282"
+            },
+            {
+              "name": "Mfolozi Local Municipality",
+              "code": "KZN281"
+            }
+          ]
+        },
+        {
+          "name": "Umkhanyakude",
+          "code": "DC27",
+          "munis": [
+            {
+              "name": "Big Five Hlabisa Local Municipality",
+              "code": "KZN276"
+            },
+            {
+              "name": "Mtubatuba Local Municipality",
+              "code": "KZN275"
+            },
+            {
+              "name": "Jozini Local Municipality",
+              "code": "KZN272"
+            },
+            {
+              "name": "Umhlabuyalingana Local Municipality",
+              "code": "KZN271"
+            }
+          ]
+        },
+        {
+          "name": "Zululand",
+          "code": "DC26",
+          "munis": [
+            {
+              "name": "Ulundi Local Municipality",
+              "code": "KZN266"
+            },
+            {
+              "name": "Nongoma Local Municipality",
+              "code": "KZN265"
+            },
+            {
+              "name": "Abaqulusi Local Municipality",
+              "code": "KZN263"
+            },
+            {
+              "name": "UPhongolo Local Municipality",
+              "code": "KZN262"
+            },
+            {
+              "name": "eDumbe Local Municipality",
+              "code": "KZN261"
+            }
+          ]
+        },
+        {
+          "name": "Amajuba",
+          "code": "DC25",
+          "munis": [
+            {
+              "name": "Dannhauser Local Municipality",
+              "code": "KZN254"
+            },
+            {
+              "name": "Emadlangeni Local Municipality",
+              "code": "KZN253"
+            },
+            {
+              "name": "Newcastle Local Municipality",
+              "code": "KZN252"
+            }
+          ]
+        },
+        {
+          "name": "eThekwini",
+          "code": "ETH",
+          "munis": []
+        },
+        {
+          "name": "Umzinyathi",
+          "code": "DC24",
+          "munis": [
+            {
+              "name": "Umvoti Local Municipality",
+              "code": "KZN245"
+            },
+            {
+              "name": "Msinga Local Municipality",
+              "code": "KZN244"
+            },
+            {
+              "name": "Nqutu Local Municipality",
+              "code": "KZN242"
+            },
+            {
+              "name": "Endumeni Local Municipality",
+              "code": "KZN241"
+            }
+          ]
+        },
+        {
+          "name": "iLembe",
+          "code": "DC29",
+          "munis": [
+            {
+              "name": "Maphumulo Local Municipality",
+              "code": "KZN294"
+            },
+            {
+              "name": "Ndwedwe Local Municipality",
+              "code": "KZN293"
+            },
+            {
+              "name": "KwaDukuza Local Municipality",
+              "code": "KZN292"
+            },
+            {
+              "name": "Mandeni Local Municipality",
+              "code": "KZN291"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "North West",
+      "code": "NW",
+      "districts": [
+        {
+          "name": "Dr Kenneth Kaunda",
+          "code": "DC40",
+          "munis": [
+            {
+              "name": "JB Marks Local Municipality",
+              "code": "NW405"
+            },
+            {
+              "name": "Maquassi Hills Local Municipality",
+              "code": "NW404"
+            },
+            {
+              "name": "City of Matlosana Local Municipality",
+              "code": "NW403"
+            }
+          ]
+        },
+        {
+          "name": "Ngaka Modiri Molema",
+          "code": "DC38",
+          "munis": [
+            {
+              "name": "Ditsobotla Local Municipality",
+              "code": "NW384"
+            },
+            {
+              "name": "Mafikeng Local Municipality",
+              "code": "NW383"
+            },
+            {
+              "name": "Tswaing Local Municipality",
+              "code": "NW382"
+            },
+            {
+              "name": "Ratlou Local Municipality",
+              "code": "NW381"
+            },
+            {
+              "name": "Ramotshere Moiloa Local Municipality",
+              "code": "NW385"
+            }
+          ]
+        },
+        {
+          "name": "Bojanala",
+          "code": "DC37",
+          "munis": [
+            {
+              "name": "Moses Kotane Local Municipality",
+              "code": "NW375"
+            },
+            {
+              "name": "Kgetlengrivier Local Municipality",
+              "code": "NW374"
+            },
+            {
+              "name": "Rustenburg Local Municipality",
+              "code": "NW373"
+            },
+            {
+              "name": "Local Municipality of Madibeng",
+              "code": "NW372"
+            },
+            {
+              "name": "Moretele Local Municipality",
+              "code": "NW371"
+            }
+          ]
+        },
+        {
+          "name": "Dr Ruth Segomotsi Mompati",
+          "code": "DC39",
+          "munis": [
+            {
+              "name": "Kagisano/Molopo Local Municipality",
+              "code": "NW397"
+            },
+            {
+              "name": "Lekwa-Teemane Local Municipality",
+              "code": "NW396"
+            },
+            {
+              "name": "Greater Taung Local Municipality",
+              "code": "NW394"
+            },
+            {
+              "name": "Mamusa Local Municipality",
+              "code": "NW393"
+            },
+            {
+              "name": "Naledi Local Municipality",
+              "code": "NW392"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Western Cape",
+      "code": "WC",
+      "districts": [
+        {
+          "name": "City of Cape Town",
+          "code": "CPT",
+          "munis": []
+        },
+        {
+          "name": "Garden Route",
+          "code": "DC4",
+          "munis": [
+            {
+              "name": "Knysna Local Municipality",
+              "code": "WC048"
+            },
+            {
+              "name": "Bitou Local Municipality",
+              "code": "WC047"
+            },
+            {
+              "name": "Oudtshoorn Local Municipality",
+              "code": "WC045"
+            },
+            {
+              "name": "George Local Municipality",
+              "code": "WC044"
+            },
+            {
+              "name": "Mossel Bay Local Municipality",
+              "code": "WC043"
+            },
+            {
+              "name": "Hessequa Local Municipality",
+              "code": "WC042"
+            },
+            {
+              "name": "Kannaland Local Municipality",
+              "code": "WC041"
+            }
+          ]
+        },
+        {
+          "name": "Central Karoo",
+          "code": "DC5",
+          "munis": [
+            {
+              "name": "Beaufort West Local Municipality",
+              "code": "WC053"
+            },
+            {
+              "name": "Prince Albert Local Municipality",
+              "code": "WC052"
+            },
+            {
+              "name": "Laingsburg Local Municipality",
+              "code": "WC051"
+            }
+          ]
+        },
+        {
+          "name": "Overberg",
+          "code": "DC3",
+          "munis": [
+            {
+              "name": "Swellendam Local Municipality",
+              "code": "WC034"
+            },
+            {
+              "name": "Cape Agulhas Local Municipality",
+              "code": "WC033"
+            },
+            {
+              "name": "Overstrand Local Municipality",
+              "code": "WC032"
+            },
+            {
+              "name": "Theewaterskloof Local Municipality",
+              "code": "WC031"
+            }
+          ]
+        },
+        {
+          "name": "Cape Winelands",
+          "code": "DC2",
+          "munis": [
+            {
+              "name": "Langeberg Local Municipality",
+              "code": "WC026"
+            },
+            {
+              "name": "Breede Valley Local Municipality",
+              "code": "WC025"
+            },
+            {
+              "name": "Stellenbosch Local Municipality",
+              "code": "WC024"
+            },
+            {
+              "name": "Drakenstein Local Municipality",
+              "code": "WC023"
+            },
+            {
+              "name": "Witzenberg Local Municipality",
+              "code": "WC022"
+            }
+          ]
+        },
+        {
+          "name": "West Coast",
+          "code": "DC1",
+          "munis": [
+            {
+              "name": "Swartland Local Municipality",
+              "code": "WC015"
+            },
+            {
+              "name": "Saldanha Bay Local Municipality",
+              "code": "WC014"
+            },
+            {
+              "name": "Bergrivier Local Municipality",
+              "code": "WC013"
+            },
+            {
+              "name": "Cederberg Local Municipality",
+              "code": "WC012"
+            },
+            {
+              "name": "Matzikama Local Municipality",
+              "code": "WC011"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

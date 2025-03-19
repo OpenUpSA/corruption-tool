@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+$primary: #7a185a;
+$lightGrey: #fbfcfe;
+$theme-colors: (
+	"primary": $primary,
+    "light-grey": $lightGrey,
+	"dark": rgb(0, 0, 0)
+);
+
+$border-radius: 6px;
+
+
+
+@import "bootstrap/scss/bootstrap";
+
+body {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+}
+
+
+.navbar {
+    height: 83px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99999;
+
+    padding: 0 1rem;
+
+    .container-fluid, .row, .col, .col-auto {
+        height: 100%;
+    }
+
+    .navbar-nav {
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        a {
+            color: #fff;
+            height: 100%;
+            border-bottom: 4px solid transparent;
+            padding: 0 1rem;
+            text-decoration: none;
+            position: relative;
+    
+            &:hover, &.active {
+                border-bottom: 4px solid #fff;
+                color: #fff;
+            }
+
+            div  {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+            }
+        }
+
+    
+    }
+
+}
+
+.map-container {
+    position: relative;
+}
+
+.panel {
+    z-index: 9999;
+    position: absolute;
+    top: 100px;
+    right: 5%;
+    max-height: 90%;
+    background-color: #fff;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+
+    header {
+        background: #1C1C1C;
+        color: #fff;
+        padding: 20px;
+        border-radius: 10px 10px 0 0;
+
+        h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+    }
+
+    .accordion-button:not(.collapsed) {
+        background: #f3f4f6;
+        outline: none;
+    }
+
+    footer {
+        background: #fff;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 0 0 10px 10px;
+
+        a {
+            color: $primary;
+            text-decoration: none;
+            font-size: 12px;
+        }
+    }
+
+    .accordion {
+        --bs-accordion-btn-focus-box-shadow: 0 0 0 0 transparent;
+    }
+
+}
+
+.search-box {
+    z-index: 9999;
+    position: absolute;
+    top: 100px;
+    left: 5%;
+    max-height: 90%;
+    width: 400px;
+
+    .search-bar {
+        font-size: 16px;
+        padding: 10px 10px 10px 30px;
+        width: 100%;
+        border: none;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+
+        &:focus-visible {
+            outline: none;
+        }
+    }
+
+    .search-icon {
+        position: absolute;
+        top: 22px;
+        left: 10px;
+        transform: translateY(-50%);
+    }
+
+    .search-results {
+        background-color: #fff;
+        border-radius: 0 0 5px 5px;
+        padding: 10px;
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            li {
+                padding: 0.5em;
+                &:hover {
+                    background-color: #f3f4f6;
+                    cursor: pointer;
+                }
+            }
+        }
+
+    }
+
+   
+}
+
+
+.dropdown-select {
+
+    width: 100%;
+    
+
+    button {
+        border: 1px solid #f3f4f6;
+        font-size: 14px !important;
+        width: 100%;
+
+        text-align: left;
+
+        &::after {
+			display: none;
+		}
+    }
+}
+
+.dashboard-section {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 1.5em;
+}
+
+.dashboard-stat-number {
+    font-size: 32px;
+}
+
+
+
+h1,h2,h3,h4 {
+    font-weight: 500;
+}
+
+h1 {
+    font-size: 32px;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+table th {
+    font-weight: 500;
+}
