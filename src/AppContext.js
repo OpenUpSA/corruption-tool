@@ -17,7 +17,7 @@ export const AppProvider = ({ children }) => {
     const [focus, setFocus] = useState({type: 'National', name: 'South Africa', code: 'ZA'});
     const [geo, setGeo] = useState(nationalGeo);
     const [searchData, setSearchData] = useState(searchDataJson);
-    const koboEndpoint = "http://localhost:4000";
+    const koboEndpoint = process.env.KOBO_PROXY;
     const [corruptionTypes, setCorruptionTypes] = useState([]);
     const [corruptionTypesData, setCorruptionTypesData] = useState([]);
     const [servicesInvolved, setServicesInvolved] = useState([]);
@@ -70,7 +70,7 @@ export const AppProvider = ({ children }) => {
         const grouped = {};
 
         if (!data?.results || !Array.isArray(data.results)) {
-            return grouped; // Return empty group if no data yet
+            return grouped; 
         }
     
         data.results.forEach(entry => {
@@ -87,7 +87,9 @@ export const AppProvider = ({ children }) => {
     };
 
     const getData = async () => {
-        const response = await fetch(`${koboEndpoint}/assets/aBqe4PvaNnmvNC2rBFNHeE/data`);
+        const response = await fetch(`${koboEndpoint}/assets/aBqe4PvaNnmvNC2rBFNHeE/data`, {
+            headers: { 'Authorization': `'Token ${process.env.KOBO_API_TOKEN}'` }
+        });
         const data = await response.json();
 
         console.log(data);

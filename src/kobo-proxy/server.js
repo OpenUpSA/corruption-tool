@@ -9,7 +9,7 @@ app.get('/:path(*)', async (req, res) => {
     const path = req.params.path;
 
 
-    let url = `https://kf-kbt.openup.org.za/api/v2/${path}?format=json`;
+    let url = `${env.KOBO}${path}?format=json`;
 
 
     try {
