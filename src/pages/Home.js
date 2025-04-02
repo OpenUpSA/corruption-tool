@@ -14,7 +14,7 @@ function Home() {
                     <Map />
                 </div>
                 <Panel />
-                <Breadcrumbs/>
+                <Breadcrumbs page="home"/>
                 <Search />
             </div>
         </>

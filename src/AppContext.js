@@ -16,15 +16,16 @@ export const AppProvider = ({ children }) => {
     const [focus, setFocus] = useState({type: 'National', name: 'South Africa', code: 'ZA'});
     const [geo, setGeo] = useState(munisGeo);
     const [searchData, setSearchData] = useState(searchDataJson);
+    const [allData, setAllData] = useState([]);
     const [corruptionTypes, setCorruptionTypes] = useState([]);
     const [corruptionTypesData, setCorruptionTypesData] = useState([]);
     const [servicesInvolved, setServicesInvolved] = useState([]);
     const [servicesInvolvedData, setServicesInvolvedData] = useState([]);
-    const [allData, setAllData] = useState([]);
     const [officialsInvolvedData, setOfficialsInvolvedData] = useState([
         { label: "Administratitve officials", value: "administrative_officials", cases: [] },
         { label: "Elected officials", value: "elected_officials", cases: [] }
     ]);
+    const [hadEvidenceData, setHadEvidenceData] = useState([]);
     const [formMeta, setFormMeta] = useState(null);
     const [choroplethCounts, setChoroplethCounts] = useState({});
 
@@ -121,15 +122,11 @@ export const AppProvider = ({ children }) => {
                         muni_field = "Municipality_Name_Western_Cape";
                     }
 
-
                     const municipalityField = formMeta.survey.find(q => q.$xpath && q.$xpath.includes(muni_field));
 
                     if (municipalityField) {
                         query = `?query={"${municipalityField.$xpath}":"${focus.code}"}`;
                     }
-
-                    
-
 
                 } else if (focus.type === 'Province') {
                     const provinceField = formMeta.survey.find(q => q.name == "Province_Name");
@@ -145,12 +142,11 @@ export const AppProvider = ({ children }) => {
     
         const filtered = data.results;
 
-
-        // Same grouping logic
         let type_of_corruption = groupCases('Type_of_Corruption_Involved_S', filtered);
         let services_involved = groupCases('Type_of_Municipal_Service_Invo', filtered);
         let admin_staff = groupCases('Were_any_administrative_staff_', filtered);
         let municipal_office = groupCases('Involvement_of_Municipal_Offic', filtered);
+        let had_evidence = groupCases('Do_you_have_any_evidence_suppo', filtered);
     
         setCorruptionTypesData(prev => prev.map(type => ({
             ...type,
@@ -170,6 +166,19 @@ export const AppProvider = ({ children }) => {
             {
                 ...officialsInvolvedData[1], 
                 cases: (municipal_office['yes'] || [])
+            }
+        ]);
+
+        setHadEvidenceData([
+            {
+                label: "Yes",
+                value: "yes",
+                cases: (had_evidence['yes'] || [])
+            },
+            {
+                label: "No",
+                value: "no",
+                cases: (had_evidence['no'] || [])
             }
         ]);
 
@@ -293,11 +302,8 @@ export const AppProvider = ({ children }) => {
         setChoroplethCounts(newCounts);
     }, [allData, formMeta]);
 
-    useEffect(() => {
-    }, [corruptionTypes, servicesInvolved]);
 
-    useEffect(() => {
-    }, [corruptionTypesData]);
+
 
 
     return (
@@ -317,6 +323,7 @@ export const AppProvider = ({ children }) => {
                 corruptionTypesData,
                 servicesInvolvedData,
                 officialsInvolvedData,
+                hadEvidenceData,
                 allData,
                 choroplethCounts
             }}>

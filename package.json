@@ -1,6 +1,6 @@
 {
-  "name": "react-starter",
-  "version": "1.0.0",
+  "name": "corruption-tool",
+  "version": "0.5.0",
   "license": "MIT",
   "scripts": {
     "dev": "parcel src/index.html",

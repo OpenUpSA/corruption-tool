@@ -24,7 +24,7 @@ import Map from '../components/Map';
 
 function Dashboard() {
 
-    const { focus, allData, corruptionTypesData, servicesInvolvedData } = useAppContext();
+    const { focus, allData, corruptionTypesData, servicesInvolvedData, officialsInvolvedData, hadEvidenceData } = useAppContext();
     
     const margin = { top: 20, right: 30, bottom: 50, left: 60 };
    
@@ -33,12 +33,15 @@ function Dashboard() {
 
 
     useEffect(() => {
-       console.log(corruptionTypesData);
-    }, [corruptionTypesData]);
+
+        console.log(hadEvidenceData);
+       
+    }, [corruptionTypesData, servicesInvolvedData, officialsInvolvedData]);
+
 
     useEffect(() => {
-        console.log(servicesInvolvedData);
-    }, [servicesInvolvedData]);
+        console.log(allData);
+    }, [allData]);
 
 	return (
         <>
@@ -47,14 +50,16 @@ function Dashboard() {
         </div>
 
         <Container>
+            
+
+            <h1 className="mt-5">{focus.name}</h1>
+
             <Breadcrumbs page="dashboard" />
 
-            <h1 className="mt-3">{focus.name}</h1>
 
-
-            {/* <section className="dashboard-section dashboard-section-reported-cases mt-5">
+            <section className="dashboard-section dashboard-section-reported-cases mt-5">
                 <h2>Overview of reported cases</h2>
-                <Row className="my-3">
+                {/* <Row className="my-3">
                     <Col>
                         <Dropdown className="dropdown-select">
                             <Dropdown.Toggle variant="light-grey">
@@ -94,7 +99,7 @@ function Dashboard() {
                             </Dropdown.Menu>
                         </Dropdown>
                     </Col>
-                </Row>
+                </Row> */}
 
                 <Row className="mt-4">
                     <Col>
@@ -102,16 +107,18 @@ function Dashboard() {
                             <h3>Reported cases</h3>
                             <Row>
                                 <Col>
-                                    <span className="dashboard-stat-number">120</span>
+                                    <span className="dashboard-stat-number">
+                                        {allData.length}
+                                    </span>
                                 </Col>
                                 <Col>
-                                    <SparklinesLine
+                                    {/* <SparklinesLine
                                         stroke="#4285f4"
                                         fill="none"
                                         data={[20,50,10,22]}
                                         height={30}
                                         width={100}
-                                    />
+                                    /> */}
                                 </Col>
                             </Row>
                         </div>
@@ -121,16 +128,10 @@ function Dashboard() {
                             <h3>Cases rejected</h3>
                             <Row>
                                 <Col>
-                                    <span className="dashboard-stat-number">120</span>
+                                    <span className="dashboard-stat-number">-</span>
                                 </Col>
                                 <Col>
-                                    <SparklinesLine
-                                        stroke="#4285f4"
-                                        fill="none"
-                                        data={[20,50,10,22]}
-                                        height={30}
-                                        width={100}
-                                    />
+                                    
                                 </Col>
                             </Row>
                         </div>
@@ -140,16 +141,10 @@ function Dashboard() {
                             <h3>Involved an official</h3>
                             <Row>
                                 <Col>
-                                    <span className="dashboard-stat-number">120</span>
+                                    <span className="dashboard-stat-number">{officialsInvolvedData.find(o => o.value === "administrative_officials")?.cases?.length + officialsInvolvedData.find(o => o.value === "elected_officials")?.cases?.length}</span>
                                 </Col>
                                 <Col>
-                                    <SparklinesLine
-                                        stroke="#4285f4"
-                                        fill="none"
-                                        data={[20,50,10,22]}
-                                        height={30}
-                                        width={100}
-                                    />
+                                    
                                 </Col>
                             </Row>
                         </div>
@@ -159,16 +154,10 @@ function Dashboard() {
                             <h3>Had evidence</h3>
                             <Row>
                                 <Col>
-                                    <span className="dashboard-stat-number">120</span>
+                                <span className="dashboard-stat-number">{hadEvidenceData.find(o => o.value === "yes")?.cases?.length}</span>
                                 </Col>
                                 <Col>
-                                    <SparklinesLine
-                                        stroke="#4285f4"
-                                        fill="none"
-                                        data={[20,50,10,22]}
-                                        height={30}
-                                        width={100}
-                                    />
+                                    
                                 </Col>
                             </Row>
                         </div>
@@ -176,7 +165,7 @@ function Dashboard() {
                 </Row>
 
 
-                <ParentSize>
+                {/* <ParentSize>
                     {({ width, height }) => {
                         const chartHeight = height || 300;
 
@@ -231,10 +220,10 @@ function Dashboard() {
                         </div>
                         );
                     }}
-                    </ParentSize>
+                    </ParentSize> */}
 
 
-            </section> */}
+            </section>
 
             <section className="dashboard-section dashboard-section-types-of-cases mt-5">
                 <h2>Types of cases reported</h2>
@@ -390,7 +379,7 @@ function Dashboard() {
                 
             </section>
 
-            <section className="dashboard-section dashboard-section-comparison mt-5">
+            {/* <section className="dashboard-section dashboard-section-comparison mt-5">
                 <h2>How does this municipality compare</h2>
 
                 <Row className="my-3">
@@ -459,7 +448,7 @@ function Dashboard() {
                 </Table>
 
 
-            </section>
+            </section> */}
 
 
 

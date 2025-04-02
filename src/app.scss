@@ -134,25 +134,22 @@ body {
 
 }
 
-.breadcrumbs {
+.home-breadcrumbs .breadcrumbs {
     z-index: 9999;
     position: absolute;
     top: 10px;
     left: 5%;
 }
 
-.dashboard-breadcrumbs .breadcrumbs {
-    position: unset;
-}
 
-.breadcrumbs ul {
+.home-breadcrumbs .breadcrumbs ul {
     list-style: none;
     display: flex;
     padding: 0;
     margin: 0;
 }
 
-.breadcrumbs ul li {
+.home-breadcrumbs .breadcrumbs ul li {
     position: relative;
     background: #fff;
     color: #333;
@@ -165,11 +162,11 @@ body {
     cursor: pointer;
 }
 
-.breadcrumbs ul li:first-child {
+.home-breadcrumbs .breadcrumbs ul li:first-child {
     border-radius: 5px 0 0 5px;
 }
 
-.breadcrumbs ul li::before {
+.home-breadcrumbs .breadcrumbs ul li::before {
     content: "";
     position: absolute;
     left: -1px;
@@ -177,12 +174,11 @@ body {
     width: 10px;
     height: 100%;
     background: #fff;
-    /* match page bg to "cut out" */
     clip-path: polygon(0 0, 100% 50%, 0 100%);
     z-index: 2;
 }
 
-.breadcrumbs ul li::after {
+.home-breadcrumbs .breadcrumbs ul li::after {
     content: "";
     position: absolute;
     right: -10px;
@@ -194,30 +190,55 @@ body {
     z-index: 2;
 }
 
-.breadcrumbs ul li:first-child {
+.home-breadcrumbs .breadcrumbs ul li:first-child {
     margin-left: 0;
     padding-left: 20px;
-    /* no cut-in */
+   
 }
 
-.breadcrumbs ul li:first-child::before {
+.home-breadcrumbs .breadcrumbs ul li:first-child::before {
     display: none;
 }
 
-.breadcrumbs ul li:last-child {
+.home-breadcrumbs .breadcrumbs ul li:last-child {
     background: #7a185a;
     color: #fff;
     z-index: 3;
     border-radius: 0 5px 5px 0;
 }
 
-.breadcrumbs ul li:first-child:last-child {
+.home-breadcrumbs .breadcrumbs ul li:first-child:last-child {
     border-radius: 5px;
 }
 
-.breadcrumbs ul li:last-child::after {
+.home-breadcrumbs .breadcrumbs ul li:last-child::after {
     background: #7a185a;
     display: none;
+}
+
+.dashboard-breadcrumbs .breadcrumbs ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dashboard-breadcrumbs .breadcrumbs ul li {
+    display: inline;
+}
+
+.dashboard-breadcrumbs .breadcrumbs ul li:hover span{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.dashboard-breadcrumbs .breadcrumbs ul li::after {
+    content: ">";
+    margin: 0 10px;
+}
+
+
+.dashboard-breadcrumbs .breadcrumbs ul li:last-child::after {
+    content: "";
 }
 
 

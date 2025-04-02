@@ -29,13 +29,13 @@ function Breadcrumbs(props) {
     return (
         <>
         {
-            props.page && props.page === 'dashboard' ?
+            props.page && props.page === 'home' ?
             
-                <div className="dashboard-breadcrumbs mt-3">
+                <div className="home-breadcrumbs mt-3">
                     <div className="breadcrumbs">
                         <ul>
                         {trail.map((item, idx) => (
-                            <li key={idx} onClick={() => navigate(`/dashboard/?geo=${encodeURIComponent(item.code)}`)}>
+                            <li key={idx} onClick={() => navigate(`/?geo=${encodeURIComponent(item.code)}`)}>
                                 {item.name}
                             </li>
                         ))}
@@ -45,14 +45,16 @@ function Breadcrumbs(props) {
         
             :
 
-            <div className="breadcrumbs">
-                <ul>
-                {trail.map((item, idx) => (
-                    <li key={idx} onClick={() => navigate(`/?geo=${encodeURIComponent(item.code)}`)}>
-                        {item.name}
-                    </li>
-                ))}
-                </ul>
+            <div className="dashboard-breadcrumbs mt-3">
+                <div className="breadcrumbs">
+                    <ul>
+                    {trail.map((item, idx) => (
+                        <li key={idx} onClick={() => navigate(`/dashboard/?geo=${encodeURIComponent(item.code)}`)}>
+                            <span>{item.name}</span>
+                        </li>
+                    ))}
+                    </ul>
+                </div>
             </div>
         }
         </>
