@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 function About() {
 	return (
-        <Container>
+        <Container className="page-content-xl">
             <Row>
                 <Col>
                     <h1>About this tool</h1>

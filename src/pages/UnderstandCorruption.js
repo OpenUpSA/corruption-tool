@@ -20,7 +20,7 @@ function UnderstandCorruption() {
     }, []);
 
 	return (
-        <Container>
+        <Container className="page-content-xl">
             <Row>
                 <Col>
                     <h1>Understand Corruption</h1>

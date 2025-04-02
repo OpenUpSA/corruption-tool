@@ -17,38 +17,28 @@ import { LinePath } from '@visx/shape';
 import { Tooltip, defaultStyles, useTooltip, useTooltipInPortal } from '@visx/tooltip';
 import { localPoint } from '@visx/event';
 
+import Breadcrumbs from '../components/Breadcrumbs';
+
 import Map from '../components/Map';
 
 
 function Dashboard() {
 
-    const { focus, koboEndpoint, provincesGeo, districtsGeo, munisGeo, setFocus } = useAppContext();
-
-    const[data, setData] = useState([]);
-
+    const { focus, allData, corruptionTypesData, servicesInvolvedData } = useAppContext();
     
     const margin = { top: 20, right: 30, bottom: 50, left: 60 };
    
     const { tooltipData, tooltipLeft, tooltipTop, showTooltip, hideTooltip } = useTooltip();
     const { containerRef, TooltipInPortal } = useTooltipInPortal();
 
-    const getData = async () => {
-        const response = await fetch(`${koboEndpoint}/assets/aBqe4PvaNnmvNC2rBFNHeE/data`);
-        const allData = await response.json();
-
-        console.log(allData);
-
-        setData(Array.from({ length: 100 }, (_, i) => ({
-            date: new Date(2020, 0, i * 3),
-            cases: Math.floor(Math.random() * 200000),
-            avg: Math.floor(Math.random() * 150000)
-        })))
-    };
-
 
     useEffect(() => {
-       getData();
-    }, [focus]);
+       console.log(corruptionTypesData);
+    }, [corruptionTypesData]);
+
+    useEffect(() => {
+        console.log(servicesInvolvedData);
+    }, [servicesInvolvedData]);
 
 	return (
         <>
@@ -57,16 +47,12 @@ function Dashboard() {
         </div>
 
         <Container>
-            <h1 className="mt-5">{focus.name}</h1>
+            <Breadcrumbs page="dashboard" />
 
-            <Row>
-                <Col>
-                </Col>
-                <Col>
-                </Col>
-            </Row>
+            <h1 className="mt-3">{focus.name}</h1>
 
-            <section className="dashboard-section dashboard-section-reported-cases mt-5">
+
+            {/* <section className="dashboard-section dashboard-section-reported-cases mt-5">
                 <h2>Overview of reported cases</h2>
                 <Row className="my-3">
                     <Col>
@@ -248,12 +234,12 @@ function Dashboard() {
                     </ParentSize>
 
 
-            </section>
+            </section> */}
 
             <section className="dashboard-section dashboard-section-types-of-cases mt-5">
                 <h2>Types of cases reported</h2>
 
-                <Row className="my-3">
+                {/* <Row className="my-3">
                     <Col>
                         <Dropdown className="dropdown-select">
                             <Dropdown.Toggle variant="light-grey">
@@ -280,26 +266,41 @@ function Dashboard() {
                             </Dropdown.Menu>
                         </Dropdown>
                     </Col>
-                </Row>
+                </Row> */}
 
                 <Table hover>
                     <thead>
                         <tr>
                             <th>Rank</th>
-                            <th>Type</th>
+                            <th style={{width: "50%"}}>Type</th>
                             <th>Cases reported</th>
                             <th>% of total cases reported</th>
                             <th>vs. avg.</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Corruption type 1</td>
-                            <td>120</td>
-                            <td>20%</td>
-                            <td>10%</td>
-                        </tr>
+                        {
+                            corruptionTypesData.slice().sort((a, b) => b.cases.length - a.cases.length).map((corruptionType, index) => (
+                                <tr>
+                                    <td>
+                                        {index+1}
+                                    </td>
+                                    <td>
+                                        {corruptionType.label == "Other (Please specify)" ? "Other" : corruptionType.label}
+                                    </td>
+                                    <td>
+                                        {corruptionType.cases.length}
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                </tr>
+                            ))
+
+                        }   
                     </tbody>
                 </Table>
 
@@ -309,7 +310,7 @@ function Dashboard() {
             <section className="dashboard-section dashboard-section-services-involved mt-5">
                 <h2>Services involved in reporting cases</h2>
 
-                <Row className="my-3">
+                {/* <Row className="my-3">
                     <Col>
                         <Dropdown className="dropdown-select">
                             <Dropdown.Toggle variant="light-grey">
@@ -349,26 +350,41 @@ function Dashboard() {
                             </Dropdown.Menu>
                         </Dropdown>
                     </Col>
-                </Row>
+                </Row> */}
 
                 <Table hover>
                     <thead>
                         <tr>
                             <th>Rank</th>
-                            <th>Type</th>
+                            <th style={{width: "50%"}}>Type</th>
                             <th>Cases reported</th>
                             <th>% of total cases reported</th>
                             <th>vs. avg.</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Corruption type 1</td>
-                            <td>120</td>
-                            <td>20%</td>
-                            <td>10%</td>
-                        </tr>
+                        {
+                            servicesInvolvedData.slice().sort((a, b) => b.cases.length - a.cases.length).map((serviceInvolved, index) => (
+                                <tr>
+                                    <td>
+                                        {index+1}
+                                    </td>
+                                    <td>
+                                        {serviceInvolved.label == "Other (Please specify)" ? "Other" : serviceInvolved.label}
+                                    </td>
+                                    <td>
+                                        {serviceInvolved.cases.length}
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                </tr>
+                            ))
+
+                        }   
                     </tbody>
                 </Table>
                 

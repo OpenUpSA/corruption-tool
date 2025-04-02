@@ -27,7 +27,7 @@ function Header() {
                         </Nav>
                     </Col>
                     <Col xs="auto" className="ms-auto d-flex align-items-center">
-                        <Button variant="dark">Report corruption</Button>
+                        <Button variant="dark"><Link to="/report" className="text-white text-decoration-none">Report corruption</Link></Button>
                     </Col>
                 </Row>
             </Container>

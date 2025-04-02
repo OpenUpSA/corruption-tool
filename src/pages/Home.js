@@ -3,16 +3,20 @@ import React from 'react';
 import Map from '../components/Map';
 import Panel from '../components/Panel';
 import Search from '../components/Search';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 
 function Home() {
 	return (
-        <>
-            <div style={{ height: '100vh', width: '100%' }}>
-                <Map />
+        <>  
+            <div className="map-container">
+                <div style={{ height: '100%', width: '100%' }}>
+                    <Map />
+                </div>
+                <Panel />
+                <Breadcrumbs/>
+                <Search />
             </div>
-            <Panel />
-            <Search />
         </>
 	);
 }

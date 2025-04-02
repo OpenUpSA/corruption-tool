@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Dashboard from './pages/Dashboard';
 import UnderstandCorruption from './pages/UnderstandCorruption';
+import Report from './pages/Report';
 
 import './app.scss';
 
@@ -17,14 +18,15 @@ function App() {
 		<BrowserRouter>
 			<AppProvider>
 				<Header />
-				<div className="map-container">
-					<Routes>
-						<Route path="/" element={<Home />} />
-						<Route path="/about" element={<About />} />
-						<Route path="/dashboard" element={<Dashboard />} />
-						<Route path="/understand-corruption" element={<UnderstandCorruption />} />
-					</Routes>
-				</div>
+					<div className="page-content">
+						<Routes>
+							<Route path="/" element={<Home />} />
+							<Route path="/about" element={<About />} />
+							<Route path="/dashboard" element={<Dashboard />} />
+							<Route path="/understand-corruption" element={<UnderstandCorruption />} />
+							<Route path="/report" element={<Report />} />
+						</Routes>
+					</div>
 			</AppProvider>
 		</BrowserRouter>
 	);

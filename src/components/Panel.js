@@ -17,7 +17,7 @@ import {
 
 function Panel() {
 
-    const { focus, corruptionTypesData, servicesInvolvedData, officialsInvolvedData  } = useAppContext();
+    const { focus, corruptionTypesData, servicesInvolvedData, officialsInvolvedData, allData  } = useAppContext();
 
     return (
         <div className="panel">
@@ -29,12 +29,12 @@ function Panel() {
                                 <FontAwesomeIcon icon={faLocationDot} color='#7a185a'/>
                             </Col>
                             <Col>
-                                {focus.name}
+                                <strong>{focus.name.length > 20 ? focus.name.slice(0, 20) + '…' : focus.name}</strong>
                             </Col>
                         </Row>
                     </Col>
                     <Col xs="auto">
-                        120
+                        <strong>{allData.length}</strong>
                     </Col>
                 </Row>
             </header>
@@ -54,12 +54,12 @@ function Panel() {
                         <Accordion.Body>
                             {
                                 corruptionTypesData.map((corruptionType, index) => (
-                                    <Row key={index}>
+                                    <Row key={index} className="panel-row">
                                         <Col>
-                                            {corruptionType.label}
+                                            {corruptionType.label == "Other (Please specify)" ? "Other" : corruptionType.label}
                                         </Col>
                                         <Col xs="auto">
-                                            {corruptionType.cases.length}
+                                            {corruptionType.cases.length == 0 ? '-' : corruptionType.cases.length}
                                         </Col>
                                     </Row>
                                 ))
@@ -71,7 +71,7 @@ function Panel() {
 
                     <Accordion.Item eventKey="1">
                         <Accordion.Header>
-                            <Row>
+                            <Row className="panel-row">
                                 <Col xs="auto">
                                     <FontAwesomeIcon icon={faGear} color='#7a185a'/>
                                 </Col>
@@ -84,12 +84,12 @@ function Panel() {
                         <Accordion.Body>
                             {
                                 servicesInvolvedData.map((service, index) => (
-                                    <Row key={index}>
+                                    <Row key={index} className="panel-row">
                                         <Col>
-                                            {service.label}
+                                            {service.label == "Other (Please specify)" ? "Other" : service.label}
                                         </Col>
                                         <Col xs="auto">
-                                            {service.cases.length}
+                                            {service.cases.length == 0 ? '-' : service.cases.length}
                                         </Col>
                                     </Row>
                                 ))
@@ -111,12 +111,12 @@ function Panel() {
                         <Accordion.Body>
                             {
                                 officialsInvolvedData.map((official, index) => (
-                                    <Row key={index}>
+                                    <Row key={index} className="panel-row">
                                         <Col>
                                             {official.label}
                                         </Col>
                                         <Col xs="auto">
-                                            {official.cases.length}
+                                            {official.cases.length == 0 ? '-' : official.cases.length}
                                         </Col>
                                     </Row>
                                 ))
@@ -127,7 +127,7 @@ function Panel() {
             
             </div>
             <footer>
-                <Link to={`/dashboard?geo=${focus.code}`}>View details for {focus.name}</Link>
+                <Link to={`/dashboard?geo=${focus.code}`}>View details for {focus.name.length > 20 ? focus.name.slice(0, 20) + '…' : focus.name}</Link>
             </footer>
         </div>
     );

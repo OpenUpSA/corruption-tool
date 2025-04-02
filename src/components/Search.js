@@ -5,11 +5,14 @@ import { useAppContext } from '../AppContext';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
+import { useNavigate } from 'react-router-dom';
+
 
 function Search() {
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResults, setSearchResults] = useState([]);
-    const { searchData, setFocus } = useAppContext();
+    const { searchData, setFocus, enrichFocus, focus } = useAppContext();
+    const navigate = useNavigate();
 
     
 
@@ -25,28 +28,27 @@ function Search() {
             if (province.name.toLowerCase().includes(term.toLowerCase())) {
                 results.push({ type: 'Province', name: province.name, code: province.code });
             }
-
-            province.districts.forEach(district => {
-                if (district.name.toLowerCase().includes(term.toLowerCase())) {
-                    results.push({ type: 'District', name: district.name, code: district.code });
+            province.municipalities.forEach(muni => {
+                if (muni.name.toLowerCase().includes(term.toLowerCase())) {
+                    results.push({ type: 'Municipality', name: muni.name, code: muni.code });
                 }
-
-                district.munis.forEach(muni => {
-                    if (muni.name.toLowerCase().includes(term.toLowerCase())) {
-                        results.push({ type: 'Municipality', name: muni.name, code: muni.code });
-                    }
-                });
             });
+            
         });
 
         setSearchResults(results);
     };
 
+    
+
     const updateFocusArea = (result) => {
-        setFocus(result);
+        const enriched = enrichFocus(result.code, searchData);
+        navigate(`/?geo=${encodeURIComponent(result.code)}`);
         setSearchTerm('');
         setSearchResults([]);
     }
+
+   
 
     return (
         <div className="search-box">

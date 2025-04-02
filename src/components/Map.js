@@ -1,4 +1,5 @@
 import { React, useEffect, useState } from 'react';
+
 import { useAppContext } from '../AppContext';
 
 import { useNavigate } from 'react-router-dom';
@@ -19,9 +20,9 @@ import markerShadow from "leaflet/dist/images/marker-shadow.png";
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
-  iconUrl: markerIcon,
-  iconRetinaUrl: markerIcon2x,
-  shadowUrl: markerShadow,
+    iconUrl: markerIcon,
+    iconRetinaUrl: markerIcon2x,
+    shadowUrl: markerShadow,
 });
 
 function ZoomOnGeo({ geo }) {
@@ -40,60 +41,86 @@ function ZoomOnGeo({ geo }) {
 
 function Map() {
 
-    const [markers, setMarkers] = useState([]);
+
     const navigate = useNavigate();
 
-    const { geo } = useAppContext();
+    const { geo, focus, setFocus, enrichFocus, searchData, choroplethCounts } = useAppContext();
 
-    // const markers = [
-    //     { lat: -33.9249, lng: 18.4241, label: "Cape Town" },
-    //     { lat: -25.7461, lng: 28.1881, label: "Pretoria" },
-    //     { lat: -29.0852, lng: 26.1596, label: "Bloemfontein" },
-    //     { lat: -26.2041, lng: 28.0473, label: "Johannesburg" },
-    //     { lat: -24.6581, lng: 25.9128, label: "Gaborone" },
-    // ];
+    const getColor = (count) => {
+        return count > 50 ? '#800026' :
+            count > 20 ? '#BD0026' :
+                count > 10 ? '#E31A1C' :
+                    count > 5 ? '#FC4E2A' :
+                        count > 0 ? '#FD8D3C' :
+                            '#FFF';
+    };
+
+
 
     useEffect(() => {
-
-        
         
 
     }, [geo]);
 
 
     const onEachFeature = (feature, layer) => {
+        const code = feature.properties.Code;
+        const name = feature.properties.Name;
+        const count = choroplethCounts[code] || 0;
+
         layer.on({
             click: () => {
-                
-                const geoCode = geo.features[0].properties.Code;
-                navigate(`/dashboard?geo=${encodeURIComponent(geoCode)}`);
 
+                
+                let href = '/';
+                if (window.location.pathname.includes('dashboard')) {
+                    href = '/dashboard/';
+                }
+
+                navigate(`${href}?geo=${encodeURIComponent(code)}`);
+            },
+            mouseover: () => {
+                layer.setStyle({
+                    color: "#7a185a",
+                    weight: 2.5,
+                    fillOpacity: 0.3
+                });
+            },
+            mouseout: () => {
+                layer.setStyle({
+                    color: "#7a185a",
+                    weight: 2,
+                    fillOpacity: 0.2
+                });
             }
+        });
+
+        layer.bindTooltip(`${name} (${count})`, {
+            sticky: true,
+            direction: "top",
+            opacity: 0.9
         });
     };
 
     return (
         <MapContainer center={[-28, 24]} zoom={6} scrollWheelZoom={false} style={{ height: "100%", width: "100%" }}>
-            <TileLayer url="https://tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png?access-token=GxDRx2e1Cv4bP3S2TagMahOlUHu18pbRoebPnoxPtyVI21wXrlxRXfWJCMwjggQY"/>
-            <GeoJSON 
+            <TileLayer url="https://tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png?access-token=GxDRx2e1Cv4bP3S2TagMahOlUHu18pbRoebPnoxPtyVI21wXrlxRXfWJCMwjggQY" />
+            <GeoJSON
+                key={geo.features[0].properties.Code + JSON.stringify(choroplethCounts)} // 👈 forces re-render
                 data={geo}
                 onEachFeature={onEachFeature}
-                key={geo.features[0].properties.Code} 
-                style={{
-                    color: "#7a185a",
-                    weight: 1,
-                    fillColor: "transparent",
-                    fillOpacity: 0.2
+                style={feature => {
+                    const count = choroplethCounts[feature.properties.Code] || 0;
+                    return {
+                        color: "#7a185a",
+                        weight: 2,
+                        fillColor: getColor(count),
+                        fillOpacity: 0.2
+                    };
                 }}
             />
-            <ZoomOnGeo geo={geo}  />
-            <MarkerClusterGroup>
-                {markers.map((marker, index) => (
-                    <Marker key={index} position={[marker.lat, marker.lng]}>
-                        <Popup>{marker.label}</Popup>
-                    </Marker>
-                ))}
-            </MarkerClusterGroup>
+            <ZoomOnGeo geo={geo} />
+
         </MapContainer>
     );
 }

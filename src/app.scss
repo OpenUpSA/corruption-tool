@@ -3,9 +3,9 @@
 $primary: #7a185a;
 $lightGrey: #fbfcfe;
 $theme-colors: (
-	"primary": $primary,
+    "primary": $primary,
     "light-grey": $lightGrey,
-	"dark": rgb(0, 0, 0)
+    "dark": rgb(0, 0, 0)
 );
 
 $border-radius: 6px;
@@ -33,7 +33,10 @@ body {
 
     padding: 0 1rem;
 
-    .container-fluid, .row, .col, .col-auto {
+    .container-fluid,
+    .row,
+    .col,
+    .col-auto {
         height: 100%;
     }
 
@@ -49,13 +52,14 @@ body {
             padding: 0 1rem;
             text-decoration: none;
             position: relative;
-    
-            &:hover, &.active {
+
+            &:hover,
+            &.active {
                 border-bottom: 4px solid #fff;
                 color: #fff;
             }
 
-            div  {
+            div {
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -63,25 +67,30 @@ body {
             }
         }
 
-    
+
     }
 
 }
 
+.page-content {
+    margin-top: 83px;
+}
+
 .map-container {
     position: relative;
+    height: calc(100vh - 83px);
 }
 
 .panel {
     z-index: 9999;
     position: absolute;
-    top: 100px;
+    top: 20px;
     right: 5%;
     max-height: 90%;
     background-color: #fff;
     width: 300px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
     header {
         background: #1C1C1C;
@@ -94,11 +103,11 @@ body {
             font-weight: 700;
             margin: 0;
         }
-        
+
     }
 
     .accordion-button:not(.collapsed) {
-        background: #f3f4f6;
+        background: #fff;
         outline: none;
     }
 
@@ -119,12 +128,104 @@ body {
         --bs-accordion-btn-focus-box-shadow: 0 0 0 0 transparent;
     }
 
+    .panel-row {
+        padding: 2px 0 2px 12px;
+    }
+
 }
+
+.breadcrumbs {
+    z-index: 9999;
+    position: absolute;
+    top: 10px;
+    left: 5%;
+}
+
+.dashboard-breadcrumbs .breadcrumbs {
+    position: unset;
+}
+
+.breadcrumbs ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.breadcrumbs ul li {
+    position: relative;
+    background: #fff;
+    color: #333;
+    padding: 5px 20px 5px 20px;
+    margin-left: -11px;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.breadcrumbs ul li:first-child {
+    border-radius: 5px 0 0 5px;
+}
+
+.breadcrumbs ul li::before {
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: 0;
+    width: 10px;
+    height: 100%;
+    background: #fff;
+    /* match page bg to "cut out" */
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+    z-index: 2;
+}
+
+.breadcrumbs ul li::after {
+    content: "";
+    position: absolute;
+    right: -10px;
+    top: 0;
+    width: 10px;
+    height: 100%;
+    background: inherit;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+    z-index: 2;
+}
+
+.breadcrumbs ul li:first-child {
+    margin-left: 0;
+    padding-left: 20px;
+    /* no cut-in */
+}
+
+.breadcrumbs ul li:first-child::before {
+    display: none;
+}
+
+.breadcrumbs ul li:last-child {
+    background: #7a185a;
+    color: #fff;
+    z-index: 3;
+    border-radius: 0 5px 5px 0;
+}
+
+.breadcrumbs ul li:first-child:last-child {
+    border-radius: 5px;
+}
+
+.breadcrumbs ul li:last-child::after {
+    background: #7a185a;
+    display: none;
+}
+
+
 
 .search-box {
     z-index: 9999;
     position: absolute;
-    top: 100px;
+    top: 50px;
     left: 5%;
     max-height: 90%;
     width: 400px;
@@ -136,7 +237,7 @@ body {
         border: none;
         border-radius: 5px;
         background-color: #fff;
-        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
         &:focus-visible {
             outline: none;
@@ -162,6 +263,7 @@ body {
 
             li {
                 padding: 0.5em;
+
                 &:hover {
                     background-color: #f3f4f6;
                     cursor: pointer;
@@ -171,14 +273,14 @@ body {
 
     }
 
-   
+
 }
 
 
 .dropdown-select {
 
     width: 100%;
-    
+
 
     button {
         border: 1px solid #f3f4f6;
@@ -188,8 +290,8 @@ body {
         text-align: left;
 
         &::after {
-			display: none;
-		}
+            display: none;
+        }
     }
 }
 
@@ -205,7 +307,10 @@ body {
 
 
 
-h1,h2,h3,h4 {
+h1,
+h2,
+h3,
+h4 {
     font-weight: 500;
 }
 
@@ -223,4 +328,9 @@ h3 {
 
 table th {
     font-weight: 500;
+}
+
+
+.page-content-xl {
+    margin-top: 130px;
 }
