@@ -213,6 +213,8 @@ export const AppProvider = ({ children }) => {
     };
 
     useEffect(() => {
+        console.log(focus);
+
         let newGeo = null;
     
         if (focus.type === 'National') {
@@ -267,6 +269,10 @@ export const AppProvider = ({ children }) => {
     }, [formMeta]);
 
     useEffect(() => {
+
+        console.log(allData);
+
+
         if (!formMeta) return;
     
         const newCounts = {};
