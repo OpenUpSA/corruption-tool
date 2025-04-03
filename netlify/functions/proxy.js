@@ -2,7 +2,11 @@ import axios from 'axios';
 
 export async function handler(event) {
     const path = event.path.replace('/.netlify/functions/proxy/', '');
-    const url = `${process.env.KOBO}/${path}?format=json`;
+    
+    const queryParams = new URLSearchParams(event.queryStringParameters || {});
+    queryParams.set('format', 'json'); // force format=json
+    
+    const url = `${process.env.KOBO}/${path}?${queryParams.toString()}`;
 
     try {
         const response = await axios.get(url, {
