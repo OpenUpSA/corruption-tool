@@ -36,7 +36,7 @@ function UnderstandCorruption() {
                     posts.map((post, index) => (
                         <Col key={index} xs={12} md={6} lg={4}>
                             <div className="story-card">
-                                <div className="story-card-image" style={{backgroundImage: `url(${post._attachments[0].download_url.replace('?format=json','')})`}}></div>
+                                <div className="story-card-image" style={{backgroundImage: `url(${koboEndpoint}/assets/amvq455NyzA54THNne6k3a/data/11/attachments/3/)`}}></div>
                                 <div className="story-card-content">
                                     <h2>{post.Title}</h2>
                                     <p>{post.Excerpt}</p>
