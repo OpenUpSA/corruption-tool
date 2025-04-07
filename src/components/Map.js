@@ -39,12 +39,12 @@ function ZoomOnGeo({ geo }) {
 }
 
 
-function Map() {
+function Map(props) {
 
 
     const navigate = useNavigate();
 
-    const { geo, focus, setFocus, enrichFocus, searchData, choroplethCounts } = useAppContext();
+    const { geo, focus, setFocus, enrichFocus, searchData } = useAppContext();
 
     const getColor = (count) => {
         return count > 50 ? '#800026' :
@@ -58,6 +58,8 @@ function Map() {
 
 
     useEffect(() => {
+
+        
         
 
     }, [geo]);
@@ -66,7 +68,7 @@ function Map() {
     const onEachFeature = (feature, layer) => {
         const code = feature.properties.Code;
         const name = feature.properties.Name;
-        const count = choroplethCounts[code] || 0;
+        const count = props.counts[code] || 0;
 
         layer.on({
             click: () => {
@@ -106,11 +108,11 @@ function Map() {
         <MapContainer center={[-28, 24]} zoom={6} scrollWheelZoom={false} style={{ height: "100%", width: "100%" }}>
             <TileLayer url="https://tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png?access-token=GxDRx2e1Cv4bP3S2TagMahOlUHu18pbRoebPnoxPtyVI21wXrlxRXfWJCMwjggQY" />
             <GeoJSON
-                key={geo.features[0].properties.Code + JSON.stringify(choroplethCounts)} // 👈 forces re-render
+                key={geo.features[0].properties.Code + JSON.stringify(props.counts)} 
                 data={geo}
                 onEachFeature={onEachFeature}
                 style={feature => {
-                    const count = choroplethCounts[feature.properties.Code] || 0;
+                    const count = props.counts[feature.properties.Code] || 0;
                     return {
                         color: "#7a185a",
                         weight: 2,

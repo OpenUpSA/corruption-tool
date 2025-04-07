@@ -184,9 +184,6 @@ export const AppProvider = ({ children }) => {
 
         setAllData(filtered);
 
-        
-        
-
     };
 
     const enrichFocus = (code, searchData) => {
@@ -213,7 +210,7 @@ export const AppProvider = ({ children }) => {
     };
 
     useEffect(() => {
-        console.log(focus);
+        
 
         let newGeo = null;
     
@@ -236,8 +233,6 @@ export const AppProvider = ({ children }) => {
     
         if (newGeo) {
             setGeo(newGeo);
-            
-            
         }
     }, [focus]);
 
@@ -269,9 +264,6 @@ export const AppProvider = ({ children }) => {
     }, [formMeta]);
 
     useEffect(() => {
-
-        console.log(allData);
-
 
         if (!formMeta) return;
     
