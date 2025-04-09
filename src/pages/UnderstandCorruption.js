@@ -3,6 +3,9 @@ import { useAppContext } from '../AppContext';
 
 import ReactMarkdown from 'react-markdown';
 
+import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
+
 import { useNavigate, useLocation } from 'react-router-dom';
 
 
@@ -61,7 +64,7 @@ function UnderstandCorruption() {
                             <h1>{currentPost.Title}</h1>
                             <p>{currentPost.Excerpt}</p>
                             <div className="story-card-image" style={{backgroundImage: `url(${koboEndpoint}/assets/amvq455NyzA54THNne6k3a/data/11/attachments/3/)`}}></div>
-                            <ReactMarkdown>{currentPost.Content}</ReactMarkdown>
+                            <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>{currentPost.Content}</ReactMarkdown>
                         </Col>
                     </Row>
                 )
@@ -79,7 +82,7 @@ function UnderstandCorruption() {
                                 <div className="story-card" onClick={() => navigate(`/understand-corruption?p=${encodeURIComponent(post._id)}`)}>
                                     <div className="story-card-image" style={{backgroundImage: `url(${koboEndpoint}/assets/amvq455NyzA54THNne6k3a/data/11/attachments/3/)`}}></div>
                                     <div className="story-card-content">
-                                        <h2>{post.Title}</h2>
+                                        <h2 className="mb-4">{post.Title}</h2>
                                         <p>{post.Excerpt}</p>
                                     </div>
                                 </div>
