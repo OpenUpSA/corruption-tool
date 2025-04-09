@@ -19,7 +19,7 @@ function Panel() {
 	return (
 		<div className={`panel panel-drawer ${open ? 'open' : 'closed'}`}>
 			<div className="panel-toggle" onClick={() => setOpen(!open)}>
-				<FontAwesomeIcon icon={open ? faChevronDown : faChevronUp} />
+				<FontAwesomeIcon color="#fff" icon={open ? faChevronDown : faChevronUp} />
 			</div>
 
 			<header>
