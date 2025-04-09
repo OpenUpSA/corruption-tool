@@ -209,7 +209,7 @@ function Dashboard() {
                 <Breadcrumbs page="dashboard" />
 
                 <Row className="my-3">
-                        <Col>
+                        <Col xs={12} md={6}>
                             <Dropdown className="dropdown-select">
                                 <Dropdown.Toggle variant="light-grey">
                                     <Row>
@@ -218,12 +218,12 @@ function Dashboard() {
                                     </Row>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <Dropdown.Item onClick={() => console.log('hey')}></Dropdown.Item>
+                                    <Dropdown.Item onClick={() => console.log('hey')}>Loading...</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                         </Col>
                         
-                        <Col>
+                        <Col className="pt-3 pt-md-0">
                             <Dropdown className="dropdown-select">
                                 <Dropdown.Toggle variant="light-grey">
                                     <Row>
@@ -249,7 +249,7 @@ function Dashboard() {
                     
 
                     <Row className="mt-4">
-                        <Col>
+                        <Col xs={12} md={4}>
                             <div className="dashboard-stat">
                                 <h3>Reported cases</h3>
                                 <Row>
@@ -271,7 +271,7 @@ function Dashboard() {
                             </div>
                         </Col>
                         
-                        <Col>
+                        <Col xs={12} md={4}>
                             <div className="dashboard-stat">
                                 <h3>Involved an official</h3>
                                 <Row>
@@ -287,7 +287,7 @@ function Dashboard() {
                                 </Row>
                             </div>
                         </Col>
-                        <Col>
+                        <Col xs={12} md={4}>
                             <div className="dashboard-stat">
                                 <h3>Had evidence</h3>
                                 <Row>
@@ -413,8 +413,8 @@ function Dashboard() {
                             <tr>
                                 <th>Rank</th>
                                 <th style={{ width: "50%" }}>Type</th>
-                                <th>Cases reported</th>
-                                <th>% of total cases reported</th>
+                                <th>Cases <span className="d-none d-md-inline">reported</span></th>
+                                <th>% <span className="d-none d-md-inline">of total cases reported</span></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -454,8 +454,8 @@ function Dashboard() {
                             <tr>
                                 <th>Rank</th>
                                 <th style={{ width: "50%" }}>Type</th>
-                                <th>Cases reported</th>
-                                <th>% of total cases reported</th>
+                                <th>Cases <span className="d-none d-md-inline">reported</span></th>
+                                <th>% <span className="d-none d-md-inline">of total cases reported</span></th>
                             </tr>
                         </thead>
                         <tbody>

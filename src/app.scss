@@ -46,12 +46,15 @@ body {
         align-items: center;
 
         a {
+            display: inline-block;
             color: #fff;
+            font-size: 1rem;
             height: 100%;
             border-bottom: 4px solid transparent;
             padding: 0 1rem;
             text-decoration: none;
             position: relative;
+            
 
             &:hover,
             &.active {
@@ -61,6 +64,7 @@ body {
 
             div {
                 display: flex;
+                padding: 0 0.5em;  
                 align-items: center;
                 justify-content: center;
                 height: 100%;
@@ -70,7 +74,24 @@ body {
 
     }
 
+   
+
 }
+
+
+.offcanvas {
+    background-color: #003366; // or your primary
+    z-index:99999;
+    .nav-link {
+      color: white;
+      font-size: 1.2rem;
+      padding: 0.5rem 1rem;
+  
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 
 .page-content {
     margin-top: 83px;
@@ -81,61 +102,101 @@ body {
     height: calc(100vh - 83px);
 }
 
+// Your existing .panel styles stay unchanged
 .panel {
-    z-index: 9999;
-    position: absolute;
-    top: 20px;
-    right: 5%;
-    max-height: 90%;
-    background-color: #fff;
-    width: 300px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	z-index: 1030;
+	position: absolute;
+	top: 20px;
+	right: 5%;
+	max-height: 90%;
+	background-color: #fff;
+	width: 300px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
-    header {
-        background: #1C1C1C;
-        color: #fff;
-        padding: 20px;
-        border-radius: 10px 10px 0 0;
+	header {
+		background: #1C1C1C;
+		color: #fff;
+		padding: 20px;
+		border-radius: 10px 10px 0 0;
 
-        h2 {
-            font-size: 20px;
-            font-weight: 700;
-            margin: 0;
-        }
+		h2 {
+			font-size: 20px;
+			font-weight: 700;
+			margin: 0;
+		}
+	}
 
-    }
+	.accordion-button:not(.collapsed) {
+		background: #fff;
+		outline: none;
+	}
 
-    .accordion-button:not(.collapsed) {
-        background: #fff;
-        outline: none;
-    }
+	footer {
+		background: #fff;
+		color: #fff;
+		padding: 10px 20px;
+		border-radius: 0 0 10px 10px;
 
-    footer {
-        background: #fff;
-        color: #fff;
-        padding: 10px 20px;
-        border-radius: 0 0 10px 10px;
+		a {
+			color: $primary;
+			text-decoration: none;
+			font-size: 12px;
+		}
+	}
 
-        a {
-            color: $primary;
-            text-decoration: none;
-            font-size: 12px;
-        }
-    }
+	.accordion {
+		--bs-accordion-btn-focus-box-shadow: 0 0 0 0 transparent;
+	}
 
-    .accordion {
-        --bs-accordion-btn-focus-box-shadow: 0 0 0 0 transparent;
-    }
+	.panel-row {
+		padding: 2px 0 2px 12px;
+	}
+}
 
-    .panel-row {
-        padding: 2px 0 2px 12px;
-    }
+// NEW: mobile-only adjustments
+.panel-drawer {
+	.panel-toggle {
+		display: none;
+	}
 
+	@media (max-width: 767.98px) {
+		position: fixed !important;
+		bottom: 0;
+		top: auto;
+		right: 0;
+		left: 0;
+		width: 100% !important;
+		max-height: 100% !important;
+		border-radius: 10px 10px 0 0;
+		transition: transform 0.3s ease;
+		box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
+		z-index: 1030;
+
+		.panel-toggle {
+			display: block;
+			width: 100%;
+			text-align: center;
+			padding: 0.5rem;
+			background: #eee;
+			cursor: pointer;
+			font-size: 1.5rem;
+			border-top-left-radius: 10px;
+			border-top-right-radius: 10px;
+		}
+
+		&.closed {
+			transform: translateY(calc(100% - 60px));
+		}
+
+		&.open {
+			transform: translateY(0);
+		}
+	}
 }
 
 .home-breadcrumbs .breadcrumbs {
-    z-index: 9999;
+    z-index: 1030;
     position: absolute;
     top: 10px;
     left: 5%;
@@ -244,7 +305,7 @@ body {
 
 
 .search-box {
-    z-index: 9999;
+    z-index: 1030;
     position: absolute;
     top: 50px;
     left: 5%;
