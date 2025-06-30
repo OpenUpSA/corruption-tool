@@ -78,7 +78,7 @@ function UnderstandCorruption() {
                 <Row className="mt-5">
                     {
                         posts.map((post, index) => (
-                            <Col key={index} xs={12} md={6} lg={4}>
+                            <Col key={index} xs={12} md={6} lg={4} className="mb-4">
                                 <div className="story-card" onClick={() => navigate(`/understand-corruption?p=${encodeURIComponent(post._id)}`)}>
                                     <div className="story-card-image" style={{backgroundImage: `url(${koboEndpoint}/assets/amvq455NyzA54THNne6k3a/data/11/attachments/3/)`}}></div>
                                     <div className="story-card-content">
