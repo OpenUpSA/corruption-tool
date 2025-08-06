@@ -72,12 +72,17 @@ function Map(props) {
 
         layer.on({
             click: () => {
-
-                
                 let href = '/';
                 if (window.location.pathname.includes('dashboard')) {
                     href = '/dashboard/';
                 }
+
+                navigate(`${href}?geo=${encodeURIComponent(code)}`);
+            },
+            dblclick: () => {
+                console.log({dblclick:code})
+
+                let href = '/dashboard/';
 
                 navigate(`${href}?geo=${encodeURIComponent(code)}`);
             },
