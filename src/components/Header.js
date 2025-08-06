@@ -14,7 +14,7 @@ function Header() {
 			<Navbar bg="primary" variant="dark" className="d-flex justify-content-between">
 				<Container fluid className="d-flex align-items-center justify-content-between">
 					<Navbar.Brand as={Link} to="/">
-						<img src={corruptionWatchLogo} alt="Corruption Watch" style={{ width: "100px" }} />
+						<img src={corruptionWatchLogo} alt="Corruption Watch" style={{ width: "150px" }} />
 					</Navbar.Brand>
 
 					{/* Hamburger button only on small screens */}
