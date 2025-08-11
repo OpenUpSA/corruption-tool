@@ -22,6 +22,7 @@ function UnderstandCorruption() {
     const [posts, setPosts] = useState([]);
     const [currentPost, setCurrentPost] = useState(null);
 
+
     const getPosts = async () => {
         const response = await fetch(`${koboEndpoint}/assets/amvq455NyzA54THNne6k3a/data`);
         const data = await response.json();
@@ -63,7 +64,7 @@ function UnderstandCorruption() {
                         <Col>
                             <h1>{currentPost.Title}</h1>
                             <p>{currentPost.Excerpt}</p>
-                            <div className="story-card-image" style={{backgroundImage: `url(${koboEndpoint}/assets/amvq455NyzA54THNne6k3a/data/11/attachments/3/)`}}></div>
+                            <div className="story-card-image" style={{backgroundImage: `url(${currentPost._attachments && currentPost._attachments[0] ? currentPost._attachments[0].download_url.split('?')[0] : `${koboEndpoint}/assets/amvq455NyzA54THNne6k3a/data/11/attachments/3/`})`}}></div>
                             <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>{currentPost.Content}</ReactMarkdown>
                         </Col>
                     </Row>
@@ -80,7 +81,7 @@ function UnderstandCorruption() {
                         posts.map((post, index) => (
                             <Col key={index} xs={12} md={6} lg={4} className="mb-4">
                                 <div className="story-card" onClick={() => navigate(`/understand-corruption?p=${encodeURIComponent(post._id)}`)}>
-                                    <div className="story-card-image" style={{backgroundImage: `url(${koboEndpoint}/assets/amvq455NyzA54THNne6k3a/data/11/attachments/3/)`}}></div>
+                                    <div className="story-card-image" style={{backgroundImage: `url(${post._attachments && post._attachments[0] ? post._attachments[0].download_url.split('?')[0] : `${koboEndpoint}/assets/amvq455NyzA54THNne6k3a/data/11/attachments/3/`})`}}></div>
                                     <div className="story-card-content">
                                         <h2 className="mb-4">{post.Title}</h2>
                                         <p>{post.Excerpt}</p>
