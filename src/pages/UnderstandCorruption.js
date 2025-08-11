@@ -19,6 +19,7 @@ function UnderstandCorruption() {
     const navigate = useNavigate();
 
     const { koboEndpoint } = useAppContext();
+    const defaultBackgroundImage = `${koboEndpoint}/api/v2/assets/amvq455NyzA54THNne6k3a/data/11/attachments/3/`;
     const [posts, setPosts] = useState([]);
     const [currentPost, setCurrentPost] = useState(null);
 
@@ -63,7 +64,7 @@ function UnderstandCorruption() {
                         <Col>
                             <h1>{currentPost.Title}</h1>
                             <p>{currentPost.Excerpt}</p>
-                            <div className="story-card-image" style={{backgroundImage: `url(${koboEndpoint}/assets/amvq455NyzA54THNne6k3a/data/11/attachments/3/)`}}></div>
+                            <div className="story-card-image" style={{backgroundImage: `url(${defaultBackgroundImage})`}}></div>
                             <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>{currentPost.Content}</ReactMarkdown>
                         </Col>
                     </Row>
@@ -80,7 +81,7 @@ function UnderstandCorruption() {
                         posts.map((post, index) => (
                             <Col key={index} xs={12} md={6} lg={4} className="mb-4">
                                 <div className="story-card" onClick={() => navigate(`/understand-corruption?p=${encodeURIComponent(post._id)}`)}>
-                                    <div className="story-card-image" style={{backgroundImage: `url(${koboEndpoint}/assets/amvq455NyzA54THNne6k3a/data/11/attachments/3/)`}}></div>
+                                    <div className="story-card-image" style={{backgroundImage: `url(${defaultBackgroundImage}s)`}}></div>
                                     <div className="story-card-content">
                                         <h2 className="mb-4">{post.Title}</h2>
                                         <p>{post.Excerpt}</p>
