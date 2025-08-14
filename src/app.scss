@@ -108,6 +108,7 @@ body {
 	top: 20px;
 	right: 5%;
 	max-height: 90%;
+    overflow: scroll;
 	background-color: #fff;
 	width: 300px;
 	border-radius: 10px;
@@ -146,11 +147,22 @@ body {
 
 	.accordion {
 		--bs-accordion-btn-focus-box-shadow: 0 0 0 0 transparent;
+
+        .accordion-item {
+            border: none !important;
+        }
 	}
 
 	.panel-row {
 		padding: 2px 0 2px 12px;
 	}
+
+    .explore-button {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.9rem;
+    }
 }
 
 // NEW: mobile-only adjustments

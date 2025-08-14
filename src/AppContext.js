@@ -32,7 +32,7 @@ export const AppProvider = ({ children }) => {
     const location = useLocation();
 
     const getChoices = async () => {
-        const response = await fetch(`${koboEndpoint}/assets/aBqe4PvaNnmvNC2rBFNHeE/`);
+        const response = await fetch(`${koboEndpoint}/api/v2/assets/aBqe4PvaNnmvNC2rBFNHeE/`);
         const form = await response.json();
     
         let survey = form.content.survey;
@@ -137,7 +137,7 @@ export const AppProvider = ({ children }) => {
             }
         }
 
-        const response = await fetch(`${koboEndpoint}/assets/aBqe4PvaNnmvNC2rBFNHeE/data${query}`);
+        const response = await fetch(`${koboEndpoint}/api/v2/assets/aBqe4PvaNnmvNC2rBFNHeE/data${query}`);
         const data = await response.json();
     
         const filtered = data.results;
@@ -239,7 +239,7 @@ export const AppProvider = ({ children }) => {
 
     useEffect(() => {
         const fetchFormMeta = async () => {
-            const response = await fetch(`${koboEndpoint}/assets/aBqe4PvaNnmvNC2rBFNHeE/`);
+            const response = await fetch(`${koboEndpoint}/api/v2/assets/aBqe4PvaNnmvNC2rBFNHeE/`);
             const data = await response.json();
             setFormMeta(data.content);
         };
