@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "parcel src/index.html",
     "build": "parcel build src/index.html",
-    "proxy": "node src/kobo-proxy/server.js"
+    "proxy": "node src/kobo-proxy/server.js",
+    "syncMuniProperties": "node src/scripts/syncMuniProperties.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
@@ -37,7 +38,8 @@
     "react-router-dom": "6.23.0",
     "rehype-raw": "6.0.0",
     "remark-gfm": "3",
-    "shpjs": "^6.1.0"
+    "shpjs": "^6.1.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "2.8.3",
