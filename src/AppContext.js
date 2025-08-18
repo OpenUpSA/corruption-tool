@@ -186,6 +186,12 @@ export const AppProvider = ({ children }) => {
 
     };
 
+    const getMuniProperties = (code) => {
+        const muniIndex = munisGeo.features.findIndex(m => m.properties.Code === code);
+        if (!munisGeo.features[muniIndex].properties) return [{}, muniIndex];
+        return [munisGeo.features[muniIndex].properties, muniIndex];
+    };
+
     const enrichFocus = (code, searchData) => {
         let result = { code, type: 'National', name: 'South Africa' };
     
@@ -195,13 +201,16 @@ export const AppProvider = ({ children }) => {
             }
             for (const muni of province.municipalities) {
                 if (muni.code === code) {
+                    const [properties, muniIndex] = getMuniProperties(code);
                     return { 
                         ...result, 
                         type: 'Municipality', 
                         name: muni.name, 
                         province: province.code,
                         parent: muni.parent, 
-                        municipality: muni.code 
+                        municipality: muni.code,
+                        properties,
+                        index: muniIndex,
                     };
                 }
             }
@@ -227,7 +236,7 @@ export const AppProvider = ({ children }) => {
     
             newGeo = { type: "FeatureCollection", features: munis };
         } else if (focus.type === 'Municipality') {
-            const muni = munisGeo.features.find(m => m.properties.Code === focus.code);
+            const muni = munisGeo.features[focus.index];
             newGeo = { type: "FeatureCollection", features: [muni] };
         }
     
