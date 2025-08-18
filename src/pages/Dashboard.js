@@ -252,7 +252,7 @@ function Dashboard() {
                                                     ...props.style,
                                                     }}
                                                 >
-                                                    Copied!
+                                                    Link copied!
                                                 </div>
                                                 )}
                                             </Overlay>
