@@ -1,4 +1,4 @@
-import { createContext, use, useContext, useEffect, useState } from 'react';
+import { createContext, use, useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import nationalBoundary from './assets/ZA_2020.json';
@@ -10,6 +10,7 @@ const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
     const koboEndpoint = process.env.KOBO_PROXY;
+    const [municipalityProperties, setMunicipalityProperties] = useState(null);
     const [nationalGeo, setNationalGeo] = useState(nationalBoundary);
     const [provincesGeo, setProvincesGeo] = useState(provinceBoundaries);
     const [munisGeo, setMunisGeo] = useState(muniBoundaries);
@@ -186,10 +187,26 @@ export const AppProvider = ({ children }) => {
 
     };
 
-    const getMuniProperties = (code) => {
-        const muniIndex = munisGeo.features.findIndex(m => m.properties.Code === code);
-        if (!munisGeo.features[muniIndex].properties) return [{}, muniIndex];
-        return [munisGeo.features[muniIndex].properties, muniIndex];
+    const getMuniProperties = (muni) => {
+        if (!municipalityProperties) return {};
+        const muniProps = municipalityProperties.find((muniProp) => {
+            // get property that starts with Municipality_Name
+            const propertyKey = Object.keys(muniProp).find(key => key.startsWith("Municipality_Name"));
+            return muniProp[propertyKey] === muni.code;
+        }) || {};
+        return {
+            detail: muniProps.Municipality_Detail,
+            image: muniProps._attachments && muniProps._attachments.length > 0 ? muniProps._attachments[0].download_url.split('?')[0] : null,
+            image_alt: muniProps.Image_Attribution_reffrence,
+            link_to_webpage: muniProps.Link_to_Webpage,
+        }
+    };
+
+    const getMuniData = async () => {
+        if (municipalityProperties !== null) return [municipalityProperties, false];
+        const response = await fetch(`${koboEndpoint}/api/v2/assets/acp7tJne4mmsMxgtbhXMNL/data/`);
+        const data = await response.json() || { results: [] };
+        return [data.results, true];
     };
 
     const enrichFocus = (code, searchData) => {
@@ -201,7 +218,7 @@ export const AppProvider = ({ children }) => {
             }
             for (const muni of province.municipalities) {
                 if (muni.code === code) {
-                    const [properties, muniIndex] = getMuniProperties(code);
+                    const properties = getMuniProperties(muni);
                     return { 
                         ...result, 
                         type: 'Municipality', 
@@ -209,13 +226,21 @@ export const AppProvider = ({ children }) => {
                         province: province.code,
                         parent: muni.parent, 
                         municipality: muni.code,
-                        properties,
-                        index: muniIndex,
+                        properties
                     };
                 }
             }
         }
         return result;
+    };
+
+    const handleSuspectedGeoCodeChange = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const geoCode = urlParams.get('geo');
+        if (geoCode && geoCode !== focus.code) {
+            const enriched = enrichFocus(geoCode, searchData);
+            setFocus(enriched);
+        }
     };
 
     useEffect(() => {
@@ -236,7 +261,7 @@ export const AppProvider = ({ children }) => {
     
             newGeo = { type: "FeatureCollection", features: munis };
         } else if (focus.type === 'Municipality') {
-            const muni = munisGeo.features[focus.index];
+            const muni = munisGeo.features.find(m => m.properties.Code === focus.code);
             newGeo = { type: "FeatureCollection", features: [muni] };
         }
     
@@ -252,19 +277,23 @@ export const AppProvider = ({ children }) => {
             const data = await response.json();
             setFormMeta(data.content);
         };
-    
-        const urlParams = new URLSearchParams(window.location.search);
-        const geoCode = urlParams.get('geo');
-    
-        if (geoCode && geoCode !== focus.code) {
-            const enriched = enrichFocus(geoCode, searchData);
-            setFocus(enriched);
-        }
-    
+        getMuniData().then(([data, updated]) => {
+            if (updated) {
+                setMunicipalityProperties(data);
+            } else {
+                handleSuspectedGeoCodeChange();
+            }
+        });
+
         fetchFormMeta();
         getChoices(); 
     
     }, [location.search]);
+
+    useEffect(() => {
+        if (!municipalityProperties) return;
+        handleSuspectedGeoCodeChange();
+    }, [municipalityProperties]);
 
     useEffect(() => {
         if (formMeta && focus) {
