@@ -208,7 +208,7 @@ function Dashboard() {
 
     const copyWebLinktoClipboard = (e) => {
         e.preventDefault();
-        navigator.clipboard.writeText(focus.properties.link_to_webpage || "");
+        navigator.clipboard.writeText(window.location);
         showShareTooltip(true);
         setTimeout(() => showShareTooltip(false), 2000);
     };
