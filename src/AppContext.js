@@ -139,7 +139,7 @@ export const AppProvider = ({ children }) => {
             }
         }
 
-        const response = await fetch(`${koboEndpoint}/api/v2/assets/aBqe4PvaNnmvNC2rBFNHeE/data${query}`);
+        const response = await fetch(`${koboEndpoint}/assets/aBqe4PvaNnmvNC2rBFNHeE/data${query}`);
         const data = await response.json();
     
         const filtered = data.results;
@@ -205,7 +205,7 @@ export const AppProvider = ({ children }) => {
 
     const getMuniData = async () => {
         if (municipalityProperties !== null) return [municipalityProperties, false];
-        const response = await fetch(`${koboEndpoint}/api/v2/assets/acp7tJne4mmsMxgtbhXMNL/data/`);
+        const response = await fetch(`${koboEndpoint}/assets/acp7tJne4mmsMxgtbhXMNL/data/`);
         const data = await response.json() || { results: [] };
         return [data.results, true];
     };
