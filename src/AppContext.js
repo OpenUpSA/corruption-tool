@@ -1,15 +1,16 @@
-import { createContext, use, useContext, useEffect, useLayoutEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import nationalBoundary from './assets/ZA_2020.json';
 import provinceBoundaries from './assets/Provinces_2020.json';
 import muniBoundaries from './assets/MuniDistricts.json';
 import searchDataJson from './assets/search3.json';
+import {getKoboEndpoint} from './utils';
 
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-    const koboEndpoint = process.env.KOBO_PROXY;
+    const koboEndpoint = getKoboEndpoint(window.location, process.env.KOBO_PROXY, process.env.LOCAL === '1');
     const [municipalityProperties, setMunicipalityProperties] = useState(null);
     const [nationalGeo, setNationalGeo] = useState(nationalBoundary);
     const [provincesGeo, setProvincesGeo] = useState(provinceBoundaries);
