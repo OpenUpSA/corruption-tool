@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useAppContext } from '../AppContext';
-import { Link } from 'react-router-dom';
-import { Row, Col, Accordion } from 'react-bootstrap';
+import { Row, Col, Accordion, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faLocationDot,
+	faArrowRight,
 	faFile,
 	faGear,
 	faIdBadge,
@@ -39,6 +39,13 @@ function Panel() {
 					</Col>
 				</Row>
 			</header>
+
+			<div className="mt-2 mb-1 px-2 d-flex flex-column justify-content-start align-items-center">
+				<Button href={`/dashboard?geo=${focus.code}`} className="w-100 explore-button">
+					<span>Explore detailed corruption data</span><FontAwesomeIcon icon={faArrowRight} color='#fff' className='d-inline' />
+				</Button>
+				<hr className="m-0 mt-2 w-100" />
+			</div>
 
 			<div className="panel-content">
 				<Accordion defaultActiveKey={['0', '1', '2']} alwaysOpen>
@@ -119,12 +126,6 @@ function Panel() {
 					</Accordion.Item>
 				</Accordion>
 			</div>
-
-			<footer className="mt-3">
-				<Link to={`/dashboard?geo=${focus.code}`}>
-					View details for {focus.name.length > 20 ? focus.name.slice(0, 20) + '…' : focus.name}
-				</Link>
-			</footer>
 		</div>
 	);
 }
