@@ -114,6 +114,7 @@ body {
 	top: 20px;
 	right: 5%;
 	max-height: 90%;
+    overflow-y: hidden;
 	background-color: #fff;
 	width: 300px;
 	border-radius: 10px;
@@ -131,6 +132,27 @@ body {
 			margin: 0;
 		}
 	}
+    
+    .panel-content {
+        overflow-y: auto;
+        overflow-x: hidden;
+        max-height: 70vh;
+    }
+
+    .panel-content::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .panel-content::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 6px;
+    }
+
+    .panel-content::-webkit-scrollbar-thumb {
+        background: #b72887;
+        border-radius: 6px;
+    }
+    
 
 	.accordion-button:not(.collapsed) {
 		background: #fff;
@@ -152,11 +174,22 @@ body {
 
 	.accordion {
 		--bs-accordion-btn-focus-box-shadow: 0 0 0 0 transparent;
+
+        .accordion-item {
+            border: none !important;
+        }
 	}
 
 	.panel-row {
 		padding: 2px 0 2px 12px;
 	}
+
+    .explore-button {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.9rem;
+    }
 }
 
 // NEW: mobile-only adjustments
