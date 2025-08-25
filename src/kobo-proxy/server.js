@@ -27,7 +27,6 @@ app.get('/:path(*)', async (req, res) => {
             responseType: isAttachment ? 'stream' : 'json'
         });
         if (isAttachment) {
-            // Convert the data to a buffer and send it as an attachment
             res.set('Content-Type', response.headers['content-type']);  // or the appropriate content type
             res.set('Content-Disposition', response.headers['content-disposition']);  // or 'attachment' to prompt download
             response.data.pipe(res);
