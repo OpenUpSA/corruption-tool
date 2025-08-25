@@ -11,16 +11,29 @@ app.get('/:path(*)', async (req, res) => {
     let path = req.params.path;
     let queryString = req.originalUrl.split('?')[1] || '';
 
+    const isAttachment = (path.includes('attachments')); // is an image or file attachment
+
+    let url = `${process.env.KOBO}${path}?${queryString}`;
     // If you want to add your format=json param safely:
-    let url = `${process.env.KOBO}${path}?${queryString}${queryString ? '&' : ''}format=json`;
+    if (!isAttachment) {
+        url = `${url}${queryString ? '&' : ''}format=json`;
+    }
 
     console.log(url);
 
     try {
         const response = await axios.get(url, {
-            headers: { 'Authorization': `Token ${process.env.KOBO_API_TOKEN}` }
+            headers: { 'Authorization': `Token ${process.env.KOBO_API_TOKEN}` },
+            responseType: isAttachment ? 'stream' : 'json'
         });
-        res.json(response.data);
+        if (isAttachment) {
+            // Convert the data to a buffer and send it as an attachment
+            res.set('Content-Type', response.headers['content-type']);  // or the appropriate content type
+            res.set('Content-Disposition', response.headers['content-disposition']);  // or 'attachment' to prompt download
+            response.data.pipe(res);
+        } else {
+            res.json(response.data);
+        }
     } catch (err) {
         res.status(err.response?.status || 500).json({ error: err.message });
     }

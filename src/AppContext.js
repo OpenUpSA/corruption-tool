@@ -195,6 +195,10 @@ export const AppProvider = ({ children }) => {
             const propertyKey = Object.keys(muniProp).find(key => key.startsWith("Municipality_Name"));
             return muniProp[propertyKey] === muni.code;
         }) || {};
+        let image = muniProps._attachments && muniProps._attachments.length > 0 ? muniProps._attachments[0].download_url.split('?')[0] : null;
+        if (image){
+            image = image.replace('https://kf-kbt.openup.org.za', koboEndpoint);
+        }
         return {
             detail: muniProps.Municipality_Detail,
             image: muniProps._attachments && muniProps._attachments.length > 0 ? muniProps._attachments[0].download_url.split('?')[0] : null,
