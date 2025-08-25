@@ -18,13 +18,13 @@ function UnderstandCorruption() {
 
     const navigate = useNavigate();
 
-    const { koboEndpoint } = useAppContext();
+    const { koboEndpoint, isLocal } = useAppContext();
     const [posts, setPosts] = useState([]);
     const [currentPost, setCurrentPost] = useState(null);
 
 
     const getPosts = async () => {
-        const response = await fetch(`${koboEndpoint}/assets/amvq455NyzA54THNne6k3a/data`);
+        const response = await fetch(`${koboEndpoint}/api/v2/assets/amvq455NyzA54THNne6k3a/data`.replace(isLocal ? '' : '/api/v2', ''));
         const data = await response.json();
         setPosts(data.results);
     };
@@ -64,7 +64,7 @@ function UnderstandCorruption() {
                         <Col>
                             <h1>{currentPost.Title}</h1>
                             <p>{currentPost.Excerpt}</p>
-                            <div className="story-card-image" style={{backgroundImage: `url(${currentPost._attachments && currentPost._attachments[0] ? currentPost._attachments[0].download_url.replace("https://kf-kbt.openup.org.za", koboEndpoint).split('?')[0] : ''})`}}></div>
+                            <div className="story-card-image" style={{backgroundImage: `url(${currentPost._attachments && currentPost._attachments[0] ? currentPost._attachments[0].download_url.replace("https://kf-kbt.openup.org.za", koboEndpoint).replace(isLocal?'' : '/api/v2', '').split('?')[0] : ''})`}}></div>
                             <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>{currentPost.Content}</ReactMarkdown>
                         </Col>
                     </Row>
@@ -81,7 +81,7 @@ function UnderstandCorruption() {
                         posts.map((post, index) => (
                             <Col key={index} xs={12} md={6} lg={4} className="mb-4">
                                 <div className="story-card" onClick={() => navigate(`/understand-corruption?p=${encodeURIComponent(post._id)}`)}>
-                                    <div className="story-card-image" style={{backgroundImage: `url(${post._attachments && post._attachments[0] ? post._attachments[0].download_url.replace("https://kf-kbt.openup.org.za", koboEndpoint).split('?')[0] : ''})`}}></div>
+                                    <div className="story-card-image" style={{backgroundImage: `url(${post._attachments && post._attachments[0] ? post._attachments[0].download_url.replace("https://kf-kbt.openup.org.za", koboEndpoint).replace(isLocal?'' : '/api/v2', '').split('?')[0] : ''})`}}></div>
                                     <div className="story-card-content">
                                         <h2 className="mb-4">{post.Title}</h2>
                                         <p>{post.Excerpt}</p>

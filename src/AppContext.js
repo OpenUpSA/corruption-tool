@@ -10,7 +10,8 @@ import {getKoboEndpoint} from './utils';
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-    const koboEndpoint = getKoboEndpoint(window.location, process.env.KOBO_PROXY, process.env.LOCAL === '1');
+    const isLocal = process.env.LOCAL === '1';
+    const koboEndpoint = getKoboEndpoint(window.location, process.env.KOBO_PROXY, isLocal);
     const [municipalityProperties, setMunicipalityProperties] = useState(null);
     const [nationalGeo, setNationalGeo] = useState(nationalBoundary);
     const [provincesGeo, setProvincesGeo] = useState(provinceBoundaries);
@@ -34,7 +35,7 @@ export const AppProvider = ({ children }) => {
     const location = useLocation();
 
     const getChoices = async () => {
-        const response = await fetch(`${koboEndpoint}/assets/aBqe4PvaNnmvNC2rBFNHeE/`);
+        const response = await fetch(`${koboEndpoint}/api/v2/assets/aBqe4PvaNnmvNC2rBFNHeE/`.replace(isLocal ? '' : '/api/v2', ''));
         const form = await response.json();
     
         let survey = form.content.survey;
@@ -139,7 +140,7 @@ export const AppProvider = ({ children }) => {
             }
         }
 
-        const response = await fetch(`${koboEndpoint}/assets/aBqe4PvaNnmvNC2rBFNHeE/data${query}`);
+        const response = await fetch(`${koboEndpoint}/api/v2/assets/aBqe4PvaNnmvNC2rBFNHeE/data${query}`.replace(isLocal ? '' : '/api/v2', ''));
         const data = await response.json();
     
         const filtered = data.results;
@@ -198,6 +199,9 @@ export const AppProvider = ({ children }) => {
         let image = muniProps._attachments && muniProps._attachments.length > 0 ? muniProps._attachments[0].download_url.split('?')[0] : null;
         if (image){
             image = image.replace('https://kf-kbt.openup.org.za', koboEndpoint);
+            if (!isLocal){
+                image = image.replace('/api/v2', '');
+            }
         }
         return {
             detail: muniProps.Municipality_Detail,
@@ -209,7 +213,7 @@ export const AppProvider = ({ children }) => {
 
     const getMuniData = async () => {
         if (municipalityProperties !== null) return [municipalityProperties, false];
-        const response = await fetch(`${koboEndpoint}/assets/acp7tJne4mmsMxgtbhXMNL/data/`);
+        const response = await fetch(`${koboEndpoint}/api/v2/assets/acp7tJne4mmsMxgtbhXMNL/data/`.replace(isLocal ? '' : '/api/v2', ''));
         const data = await response.json() || { results: [] };
         return [data.results, true];
     };
@@ -278,7 +282,7 @@ export const AppProvider = ({ children }) => {
 
     useEffect(() => {
         const fetchFormMeta = async () => {
-            const response = await fetch(`${koboEndpoint}/assets/aBqe4PvaNnmvNC2rBFNHeE/`);
+            const response = await fetch(`${koboEndpoint}/api/v2/assets/aBqe4PvaNnmvNC2rBFNHeE/`.replace(isLocal ? '' : '/api/v2', ''));
             const data = await response.json();
             setFormMeta(data.content);
         };
@@ -366,7 +370,8 @@ export const AppProvider = ({ children }) => {
                 officialsInvolvedData,
                 hadEvidenceData,
                 allData,
-                choroplethCounts
+                choroplethCounts,
+                isLocal
             }}>
             {children}
         </AppContext.Provider>
