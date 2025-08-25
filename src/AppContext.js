@@ -201,7 +201,7 @@ export const AppProvider = ({ children }) => {
         }
         return {
             detail: muniProps.Municipality_Detail,
-            image: muniProps._attachments && muniProps._attachments.length > 0 ? muniProps._attachments[0].download_url.split('?')[0] : null,
+            image: image,
             image_alt: muniProps.Image_Attribution_reffrence,
             link_to_webpage: muniProps.Link_to_Webpage,
         }
