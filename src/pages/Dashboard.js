@@ -1,12 +1,11 @@
-import { React, use, useEffect, useState } from 'react';
+import { React, useRef, useEffect, useState } from 'react';
 import { useAppContext } from '../AppContext';
 
-import { Container, Row, Col, Dropdown, Table } from 'react-bootstrap';
+import { Container, Overlay, OverlayTrigger, Tooltip, Image, Row, Col, Dropdown, Table } from 'react-bootstrap';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSortDown } from "@fortawesome/free-solid-svg-icons";
+import { faSortDown, faShareAlt, faGlobe } from "@fortawesome/free-solid-svg-icons";
 
-import { SparklinesLine } from "@lueton/react-sparklines";
 
 import { ParentSize } from '@visx/responsive';
 import { Group } from '@visx/group';
@@ -14,7 +13,7 @@ import { scaleLinear, scaleTime } from '@visx/scale';
 import { Bar } from '@visx/shape';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { LinePath } from '@visx/shape';
-import { Tooltip, defaultStyles, useTooltip, useTooltipInPortal } from '@visx/tooltip';
+import { defaultStyles, useTooltip, useTooltipInPortal } from '@visx/tooltip';
 import { localPoint } from '@visx/event';
 
 import { timeDay, timeDays } from 'd3-time';
@@ -190,10 +189,30 @@ function Dashboard() {
             
     }, [hadEvidenceDataDash]);
 
-  
+    const [show, showShareTooltip] = useState(false);
+    const target = useRef(null);
 
-  
-   
+
+
+    const renderWebTooltip = (props) => (
+        <Tooltip id="web-icon-tooltip" {...props}>
+        Go to municipality site
+        </Tooltip>
+    );
+
+    const renderShareTooltip = (props) => (
+        <Tooltip id="share-icon-tooltip" {...props}>
+        Copied
+        </Tooltip>
+    );
+
+    const copyWebLinktoClipboard = (e) => {
+        e.preventDefault();
+        navigator.clipboard.writeText(window.location);
+        showShareTooltip(true);
+        setTimeout(() => showShareTooltip(false), 2000);
+    };
+
 
     return (
         <>
@@ -202,11 +221,62 @@ function Dashboard() {
             </div>
 
             <Container>
-
-
-                <h1 className="mt-5">{focus.name}</h1>
-
-                <Breadcrumbs page="dashboard" />
+                {focus.type === "Municipality"?
+                <>
+                    <Row className="mt-5">
+                        <Col xs={12} md={7} lg={8}>
+                            <h1>{focus.name}</h1>
+                            <div className="mb-3 d-flex align-items-center justify-content-between">
+                                <Breadcrumbs page="dashboard" />
+                                <div className="d-flex flex-row align-items-center">  
+                                    {focus.properties.link_to_webpage? (
+                                        <>  
+                                            <FontAwesomeIcon icon={faShareAlt} ref={target} onClick={copyWebLinktoClipboard} className="me-2 fs-5 cursor-pointer" />
+                                            <Overlay target={target.current} show={show} placement="top">
+                                                {({
+                                                placement: _placement,
+                                                arrowProps: _arrowProps,
+                                                show: _show,
+                                                popper: _popper,
+                                                hasDoneInitialMeasure: _hasDoneInitialMeasure,
+                                                ...props
+                                                }) => (
+                                                <div
+                                                    {...props}
+                                                    style={{
+                                                    position: 'absolute',
+                                                    backgroundColor: '#000',
+                                                    padding: '4px 10px',
+                                                    color: 'white',
+                                                    borderRadius: 3,
+                                                    ...props.style,
+                                                    }}
+                                                >
+                                                    Link copied!
+                                                </div>
+                                                )}
+                                            </Overlay>
+                                            <OverlayTrigger placement="top" delay={{ show: 250, hide: 400 }} overlay={renderWebTooltip}>
+                                                <a href={focus.properties.link_to_webpage || "#"} target="_blank" rel="noopener noreferrer" className="cursor-pointer text-dark"><FontAwesomeIcon icon={faGlobe} className="me-2 fs-5 cursor-pointer" /></a>
+                                            </OverlayTrigger>
+                                        </>
+                                    ): null}
+                                </div>
+                            </div>
+                            <p>{focus.properties.detail || ""}</p>
+                        </Col>
+                        <Col xs={12} md={5} lg={4}>
+                            <Image src={focus.properties.image} 
+                                alt={focus.properties.image_alt || ""} className='rounded' fluid />
+                        </Col>
+                    </Row>
+                </>
+                :
+                <>
+                    <h1 className="mt-5">{focus.name}</h1>
+                    <Breadcrumbs page="dashboard" />
+                </>
+                }
 
                 <Row className="my-3">
                         <Col xs={12} md={6}>

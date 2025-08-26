@@ -1,15 +1,18 @@
-import { createContext, use, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import nationalBoundary from './assets/ZA_2020.json';
 import provinceBoundaries from './assets/Provinces_2020.json';
 import muniBoundaries from './assets/MuniDistricts.json';
 import searchDataJson from './assets/search3.json';
+import {getKoboEndpoint} from './utils';
 
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-    const koboEndpoint = process.env.KOBO_PROXY;
+    const isLocal = process.env.LOCAL === '1';
+    const koboEndpoint = getKoboEndpoint(window.location, process.env.KOBO_PROXY, isLocal);
+    const [municipalityProperties, setMunicipalityProperties] = useState(null);
     const [nationalGeo, setNationalGeo] = useState(nationalBoundary);
     const [provincesGeo, setProvincesGeo] = useState(provinceBoundaries);
     const [munisGeo, setMunisGeo] = useState(muniBoundaries);
@@ -32,7 +35,7 @@ export const AppProvider = ({ children }) => {
     const location = useLocation();
 
     const getChoices = async () => {
-        const response = await fetch(`${koboEndpoint}/assets/aBqe4PvaNnmvNC2rBFNHeE/`);
+        const response = await fetch(`${koboEndpoint}/api/v2/assets/aBqe4PvaNnmvNC2rBFNHeE/`.replace(isLocal ? '' : '/api/v2', ''));
         const form = await response.json();
     
         let survey = form.content.survey;
@@ -137,7 +140,7 @@ export const AppProvider = ({ children }) => {
             }
         }
 
-        const response = await fetch(`${koboEndpoint}/assets/aBqe4PvaNnmvNC2rBFNHeE/data${query}`);
+        const response = await fetch(`${koboEndpoint}/api/v2/assets/aBqe4PvaNnmvNC2rBFNHeE/data${query}`.replace(isLocal ? '' : '/api/v2', ''));
         const data = await response.json();
     
         const filtered = data.results;
@@ -186,6 +189,35 @@ export const AppProvider = ({ children }) => {
 
     };
 
+    const getMuniProperties = (muni) => {
+        if (!municipalityProperties) return {};
+        const muniProps = municipalityProperties.find((muniProp) => {
+            // get property that starts with Municipality_Name
+            const propertyKey = Object.keys(muniProp).find(key => key.startsWith("Municipality_Name"));
+            return muniProp[propertyKey] === muni.code;
+        }) || {};
+        let image = muniProps._attachments && muniProps._attachments.length > 0 ? muniProps._attachments[0].download_url.split('?')[0] : null;
+        if (image){
+            image = image.replace('https://kf-kbt.openup.org.za', koboEndpoint);
+            if (!isLocal){
+                image = image.replace('/api/v2', '');
+            }
+        }
+        return {
+            detail: muniProps.Municipality_Detail,
+            image: image,
+            image_alt: muniProps.Image_Attribution_reffrence,
+            link_to_webpage: muniProps.Link_to_Webpage,
+        }
+    };
+
+    const getMuniData = async () => {
+        if (municipalityProperties !== null) return [municipalityProperties, false];
+        const response = await fetch(`${koboEndpoint}/api/v2/assets/acp7tJne4mmsMxgtbhXMNL/data/`.replace(isLocal ? '' : '/api/v2', ''));
+        const data = await response.json() || { results: [] };
+        return [data.results, true];
+    };
+
     const enrichFocus = (code, searchData) => {
         let result = { code, type: 'National', name: 'South Africa' };
     
@@ -195,18 +227,29 @@ export const AppProvider = ({ children }) => {
             }
             for (const muni of province.municipalities) {
                 if (muni.code === code) {
+                    const properties = getMuniProperties(muni);
                     return { 
                         ...result, 
                         type: 'Municipality', 
                         name: muni.name, 
                         province: province.code,
                         parent: muni.parent, 
-                        municipality: muni.code 
+                        municipality: muni.code,
+                        properties
                     };
                 }
             }
         }
         return result;
+    };
+
+    const handleSuspectedGeoCodeChange = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const geoCode = urlParams.get('geo');
+        if (geoCode && geoCode !== focus.code) {
+            const enriched = enrichFocus(geoCode, searchData);
+            setFocus(enriched);
+        }
     };
 
     useEffect(() => {
@@ -239,23 +282,27 @@ export const AppProvider = ({ children }) => {
 
     useEffect(() => {
         const fetchFormMeta = async () => {
-            const response = await fetch(`${koboEndpoint}/assets/aBqe4PvaNnmvNC2rBFNHeE/`);
+            const response = await fetch(`${koboEndpoint}/api/v2/assets/aBqe4PvaNnmvNC2rBFNHeE/`.replace(isLocal ? '' : '/api/v2', ''));
             const data = await response.json();
             setFormMeta(data.content);
         };
-    
-        const urlParams = new URLSearchParams(window.location.search);
-        const geoCode = urlParams.get('geo');
-    
-        if (geoCode && geoCode !== focus.code) {
-            const enriched = enrichFocus(geoCode, searchData);
-            setFocus(enriched);
-        }
-    
+        getMuniData().then(([data, updated]) => {
+            if (updated) {
+                setMunicipalityProperties(data);
+            } else {
+                handleSuspectedGeoCodeChange();
+            }
+        });
+
         fetchFormMeta();
         getChoices(); 
     
     }, [location.search]);
+
+    useEffect(() => {
+        if (!municipalityProperties) return;
+        handleSuspectedGeoCodeChange();
+    }, [municipalityProperties]);
 
     useEffect(() => {
         if (formMeta && focus) {
@@ -323,7 +370,8 @@ export const AppProvider = ({ children }) => {
                 officialsInvolvedData,
                 hadEvidenceData,
                 allData,
-                choroplethCounts
+                choroplethCounts,
+                isLocal
             }}>
             {children}
         </AppContext.Provider>

@@ -45,7 +45,7 @@ function Breadcrumbs(props) {
         
             :
 
-            <div className="dashboard-breadcrumbs mt-3">
+            <div className="dashboard-breadcrumbs">
                 <div className="breadcrumbs">
                     <ul>
                     {trail.map((item, idx) => (
