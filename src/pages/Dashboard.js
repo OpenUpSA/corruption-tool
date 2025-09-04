@@ -41,13 +41,22 @@ function Dashboard() {
     const { tooltipData, tooltipLeft, tooltipTop, showTooltip, hideTooltip } = useTooltip();
     const { containerRef, TooltipInPortal } = useTooltipInPortal();
 
-    const [period, setPeriod] = useState(30);
+    const [period, setPeriod] = useState(null); // in days, null means all time
 
     const [choroplethCounts, setChoroplethCounts] = useState({});
 
     const endDate = new Date();
     const startDate = period ? timeDay.offset(endDate, -period) : timeDay.offset(endDate, -1000); 
     const allDays = timeDays(startDate, endDate);
+
+    const getYearToDatePeriodInDays = () => {
+        const now = new Date();
+        const startOfYear = new Date(now.getFullYear(), 0, 1);
+        const diffTime = Math.abs(now - startOfYear);
+        return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    }
+
+    console.log("Year to date: ", getYearToDatePeriodInDays());
 
     const countsByDay = group(
         filteredData,
@@ -322,12 +331,13 @@ function Dashboard() {
                                     </Row>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                        <Dropdown.Item onClick={() => setPeriod(7)}>Last 7 days</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => setPeriod(30)}>Last 30 days</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => setPeriod(90)}>Last 3 months</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => setPeriod(180)}>Last 6 months</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => setPeriod(365)}>Last year</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => setPeriod(null)}>All time</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => setPeriod(null)}>All time</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => setPeriod(getYearToDatePeriodInDays())}>Year to date</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => setPeriod(365)}>Last 12 months</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => setPeriod(180)}>Last 6 months</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => setPeriod(90)}>Last 3 months</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => setPeriod(30)}>Last 30 days</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => setPeriod(7)}>Last 7 days</Dropdown.Item> 
                                 </Dropdown.Menu>
                             </Dropdown>
                         </Col>
