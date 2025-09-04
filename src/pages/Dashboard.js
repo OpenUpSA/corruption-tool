@@ -30,11 +30,14 @@ function Dashboard() {
 
     const { focus, allData, corruptionTypesData, servicesInvolvedData, officialsInvolvedData } = useAppContext();
     const [filteredData, setFilteredData] = useState(allData);
-    const [corruptionTypesDataDash, setCorruptionTypesDataDash] = useState(corruptionTypesData);
-    const [servicesInvolvedDataDash, setServicesInvolvedDataDash] = useState(servicesInvolvedData);
+    const [corruptionTypesDataDash, setCorruptionTypesDataDash] = useState([]);
+    const [servicesInvolvedDataDash, setServicesInvolvedDataDash] = useState([]);
     const [officialsInvolvedDataDash, setOfficialsInvolvedDataDash] = useState(officialsInvolvedData);
     const [hadEvidenceDataDash, setHadEvidenceDataDash] = useState([]);
-
+    const [selectedCorruptionType, setSelectedCorruptionType] = useState({
+        value: null,
+        label: "All Corruption Types"
+    });
     const { tooltipData, tooltipLeft, tooltipTop, showTooltip, hideTooltip } = useTooltip();
     const { containerRef, TooltipInPortal } = useTooltipInPortal();
 
@@ -97,6 +100,11 @@ function Dashboard() {
 
         let tempData = allData.filter(d => {
             const date = new Date(d._submission_time);
+            const { value } = selectedCorruptionType;
+            if (value) {
+                const key = Object.keys(d).find(k => k.endsWith("Type_of_Corruption_Involved_S"));
+                return d[key] === value && (!period || date >= startDate);
+            }
             return !period || date >= startDate;
         });
 
@@ -143,12 +151,26 @@ function Dashboard() {
         ]);
 
        
-    }, [allData, period, focus]);
+    }, [allData, period, focus, selectedCorruptionType]);
 
-   
-
-   
     useEffect(() => {
+        if(corruptionTypesData.length === 0){
+            setCorruptionTypesDataDash([{value:null, label: "Loading...", cases: []}]);
+        }else{
+            setCorruptionTypesDataDash(corruptionTypesData);
+            setSelectedCorruptionType({value:null, label: "All Corruption Types"});
+        }
+    }, [corruptionTypesData]);
+
+    useEffect(() => {
+        if(servicesInvolvedData.length === 0){
+            setServicesInvolvedDataDash([{value:null, label: "Loading...", cases: []}]);
+        }else{
+            setServicesInvolvedDataDash(servicesInvolvedData);
+        }
+    }, [servicesInvolvedData]);
+
+   useEffect(() => {
     
         const newCounts = {};
     
@@ -184,11 +206,6 @@ function Dashboard() {
         
     }, [filteredData]);
 
-    useEffect(() => {
-        console.log("Had evidence data: ", hadEvidenceDataDash);
-            
-    }, [hadEvidenceDataDash]);
-
     const [show, showShareTooltip] = useState(false);
     const target = useRef(null);
 
@@ -197,12 +214,6 @@ function Dashboard() {
     const renderWebTooltip = (props) => (
         <Tooltip id="web-icon-tooltip" {...props}>
         Go to municipality site
-        </Tooltip>
-    );
-
-    const renderShareTooltip = (props) => (
-        <Tooltip id="share-icon-tooltip" {...props}>
-        Copied
         </Tooltip>
     );
 
@@ -283,12 +294,21 @@ function Dashboard() {
                             <Dropdown className="dropdown-select">
                                 <Dropdown.Toggle variant="light-grey">
                                     <Row>
-                                        <Col>All corruption types</Col>
+                                        <Col>{selectedCorruptionType.label}</Col>
                                         <Col xs="auto"><FontAwesomeIcon icon={faSortDown} /></Col>
                                     </Row>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <Dropdown.Item onClick={() => console.log('hey')}>Loading...</Dropdown.Item>
+                                    {corruptionTypesDataDash.map((type, index) => (
+                                        <Dropdown.Item key={type.value} onClick={() => setSelectedCorruptionType({ value: type.value, label: type.label })}>
+                                            {type.label}
+                                        </Dropdown.Item>
+                                    ))}
+                                    {corruptionTypesDataDash.length > 1?
+                                    <Dropdown.Item key={null} onClick={() => setSelectedCorruptionType({ value: null, label: "All Corruption Types" })}>
+                                        All Corruption Types
+                                    </Dropdown.Item>
+                                    : null}
                                 </Dropdown.Menu>
                             </Dropdown>
                         </Col>
@@ -501,7 +521,7 @@ function Dashboard() {
                                             {corruptionType.cases.length}
                                         </td>
                                         <td>
-                                            {(!isNaN(corruptionType.cases.length / filteredData.length) ? corruptionType.cases.length / filteredData.length : 0 * 100).toFixed(2)}%   
+                                            {((!isNaN(corruptionType.cases.length / filteredData.length) ? corruptionType.cases.length / filteredData.length : 0) * 100).toFixed(2)}%   
                                         </td>
                                        
                                     </tr>
@@ -542,7 +562,7 @@ function Dashboard() {
                                             {serviceInvolved.cases.length}
                                         </td>
                                         <td>
-                                            {(serviceInvolved.cases.length / allData.length * 100).toFixed(2)}%
+                                            {((!isNaN(serviceInvolved.cases.length / filteredData.length) ? serviceInvolved.cases.length / filteredData.length : 0) * 100).toFixed(2)}%
                                         </td>
                                        
                                     </tr>
