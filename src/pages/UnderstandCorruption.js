@@ -54,6 +54,14 @@ function getPost(posts, id) {
     return null;
 }
 
+function slugToTitle(slug) {
+    return slug
+        .replace(/[-_]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .replace(/\b\w/g, c => c.toUpperCase());
+}
+
 function UnderstandCorruption() {
 
     const location = useLocation();
@@ -114,7 +122,7 @@ function UnderstandCorruption() {
                 {
                     Object.keys(posts).map((category, _index) => (
                         <Fragment key={`cat-row-${_index}`}>
-                        {category !== "" ? <h2 key={`cat-head-${_index}`} className="my-4">{category}</h2> : null}
+                        {category !== "" ? <h2 key={`cat-head-${_index}`} className="mb-4">{slugToTitle(category)}</h2> : null}
                         <Row >
                             {posts[category].map((post, index) => (
                                 <Col key={post._id} xs={12} md={6} lg={4} className="mb-4">
