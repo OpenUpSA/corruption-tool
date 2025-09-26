@@ -1,4 +1,4 @@
-import { React, use, useEffect, useState } from 'react';
+import { Fragment, React, use, useEffect, useState } from 'react';
 import { useAppContext } from '../AppContext';
 
 import ReactMarkdown from 'react-markdown';
@@ -9,8 +9,58 @@ import rehypeRaw from 'rehype-raw';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap'; 
 
+
+
+function orderPostsBy(posts, key) {
+    return posts.sort((a, b) => {
+        if (a[key] == null && b[key] == null) return 0;
+        if (a[key] == null) return 1;
+        if (b[key] == null) return -1;
+        if (a[key] < b[key]) return -1;
+        if (a[key] > b[key]) return 1;
+        return 0;
+    });
+}
+
+function groupPostsBy(posts, key) {
+    posts = orderPostsBy(posts, 'Enter_the_number_you_ppear_in_its_section');
+    posts = posts.reduce((result, post) => {
+        (result[post[key] || ""] = result[post[key] || ""] || []).push(post);
+        result[post[key] || ""] = result[post[key] || ""];
+        return result;
+    }, {});
+
+    // Arrange posts keys so "" always comes first if it exists
+    if (posts[""]) {
+        const orderedPosts = { "": posts[""] };
+        Object.keys(posts).forEach(k => {
+            if (k !== "") {
+                orderedPosts[k] = posts[k];
+            }
+        });
+        return orderedPosts;
+    }
+
+    return posts;
+}
+
+function getPost(posts, id) {
+    for (const category in posts) {
+        const post = posts[category].find(p => p._id == id);
+        if (post) return post;
+    }
+    return null;
+}
+
+function slugToTitle(slug) {
+    return slug
+        .replace(/[-_]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .replace(/\b\w/g, c => c.toUpperCase());
+}
 
 function UnderstandCorruption() {
 
@@ -19,14 +69,14 @@ function UnderstandCorruption() {
     const navigate = useNavigate();
 
     const { koboEndpoint, isLocal } = useAppContext();
-    const [posts, setPosts] = useState([]);
+    const [posts, setPosts] = useState({});
     const [currentPost, setCurrentPost] = useState(null);
 
 
     const getPosts = async () => {
         const response = await fetch(`${koboEndpoint}/api/v2/assets/amvq455NyzA54THNne6k3a/data`.replace(isLocal ? '' : '/api/v2', ''));
         const data = await response.json();
-        setPosts(data.results);
+        setPosts(groupPostsBy(data.results || [], "Please_select_the_na_this_post_to_appear"));
     };
 
     useEffect(() => {
@@ -37,9 +87,10 @@ function UnderstandCorruption() {
     useEffect(() => {
         const urlParams = new URLSearchParams(location.search);
         const postId = urlParams.get('p');
-    
-        if (postId && posts.length > 0) {
-            const post = posts.find((post) => parseInt(post._id) === parseInt(postId));
+
+        if (postId) {
+            const post = getPost(posts, postId);
+            
             if (post) {
                 setCurrentPost(post);
             }
@@ -48,13 +99,6 @@ function UnderstandCorruption() {
         }
     }, [location.search, posts]);
 
-    useEffect(() => {
-        console.log(posts);
-    }, [posts]);
-
-    useEffect(() => {
-        console.log(currentPost);
-    }, [currentPost]);
 
 	return (
         <Container className="page-content-xl">
@@ -68,31 +112,36 @@ function UnderstandCorruption() {
                             <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>{currentPost.Content}</ReactMarkdown>
                         </Col>
                     </Row>
-                )
-            : (
+                ) : (
                 <>
-                <Row>
+                <Row className="mb-4">
                     <Col>
                         <h1>Understand Corruption</h1>
                     </Col>
                 </Row>
-                <Row className="mt-5">
-                    {
-                        posts.map((post, index) => (
-                            <Col key={index} xs={12} md={6} lg={4} className="mb-4">
-                                <div className="story-card" onClick={() => navigate(`/understand-corruption?p=${encodeURIComponent(post._id)}`)}>
-                                    <div className="story-card-image" style={{backgroundImage: `url(${post._attachments && post._attachments[0] ? post._attachments[0].download_url.replace("https://kf-kbt.openup.org.za", koboEndpoint).replace(isLocal?'' : '/api/v2', '').split('?')[0] : ''})`}}></div>
-                                    <div className="story-card-content">
-                                        <h2 className="mb-4">{post.Title}</h2>
-                                        <p>{post.Excerpt}</p>
+                {
+                    Object.keys(posts).map((category, _index) => (
+                        <Fragment key={`cat-row-${_index}`}>
+                        {category !== "" ? <h2 key={`cat-head-${_index}`} className="mb-4">{slugToTitle(category)}</h2> : null}
+                        <Row >
+                            {posts[category].map((post, index) => (
+                                <Col key={post._id} xs={12} md={6} lg={4} className="mb-4">
+                                    <div className="story-card" onClick={() => navigate(`/understand-corruption?p=${encodeURIComponent(post._id)}`)}>
+                                        <div className="story-card-image" style={{backgroundImage: `url(${post._attachments && post._attachments[0] ? post._attachments[0].download_url.replace("https://kf-kbt.openup.org.za", koboEndpoint).replace(isLocal?'' : '/api/v2', '').split('?')[0] : ''})`}}></div>
+                                        <div className="story-card-content">
+                                            <h2 className="mb-4">{post.Title}</h2>
+                                            <p>{post.Excerpt}</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </Col>
-                        ))
-                    }
-                </Row>
+                                </Col>
+                            ))}
+                        </Row>
+                        </Fragment>
+                    ))
+                }
                 </>
-            )}
+                )
+            }
         </Container>
 	);
 }
