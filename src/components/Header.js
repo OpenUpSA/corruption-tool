@@ -14,7 +14,7 @@ function Header() {
 			<Navbar bg="primary" variant="dark" className="d-flex justify-content-between">
 				<Container fluid className="d-flex align-items-center justify-content-between">
 					<Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
-						<img src={ubikoLogo} alt="Ubiko" style={{ width: '100px', height: 'auto', marginRight: '20px' }} />
+						<img src={ubikoLogo} alt="Ubiko" style={{ width: '60px', height: 'auto' }} />
 					</Navbar.Brand>
 
 					{/* Hamburger button only on small screens */}
