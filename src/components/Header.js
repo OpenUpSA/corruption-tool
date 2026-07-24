@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Navbar, Nav, Button, Offcanvas } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import corruptionWatchLogo from '../assets/corruption-watch.png';
+import ubikoLogo from '../assets/Ubiko_logo_white.png';
 
 function Header() {
 	const [show, setShow] = useState(false);
@@ -13,8 +13,8 @@ function Header() {
 		<>
 			<Navbar bg="primary" variant="dark" className="d-flex justify-content-between">
 				<Container fluid className="d-flex align-items-center justify-content-between">
-					<Navbar.Brand as={Link} to="/">
-						<img src={corruptionWatchLogo} alt="Corruption Watch" style={{ width: "150px" }} />
+					<Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
+						<img src={ubikoLogo} alt="Ubiko" style={{ width: '180px', height: 'auto' }} />
 					</Navbar.Brand>
 
 					{/* Hamburger button only on small screens */}
